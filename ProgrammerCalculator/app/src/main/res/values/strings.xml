@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">ProgrammerCalculator</string>
+    <string name="allClear">AC</string>
+    <string name="add">+</string>
+    <string name="sub">-</string>
+    <string name="mul">*</string>
+    <string name="div">/</string>
+    <string name="equal">=</string>
+    <string name="mod">MOD</string>
+    <string name="AND">AND</string>
+    <string name="OR">OR</string>
+    <string name="XOR">XOR</string>
+    <string name="NAND">NAND</string>
+    <string name="NOR">NOR</string>
+    <string name="NXOR">NXOR</string>
+    <string name="FLIP">FLIP</string>
+    <string name="zero">0</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="a">A</string>
+    <string name="b">B</string>
+    <string name="c">C</string>
+    <string name="d">D</string>
+    <string name="e">E</string>
+    <string name="f">F</string>
+    <string name="unexpectedErrorMSG">Something went horribly wrong</string>
+</resources>
