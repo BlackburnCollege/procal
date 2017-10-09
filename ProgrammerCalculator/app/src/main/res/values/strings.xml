@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">ProgrammerCalculator</string>
     <string name="allClear">AC</string>
+    <string name="DEC">DEC</string>
+    <string name="HEX">HEX</string>
+    <string name="OCT">OCT</string>
+    <string name="BIN">BIN</string>
     <string name="add">+</string>
     <string name="sub">-</string>
     <string name="mul">*</string>
@@ -13,7 +17,7 @@
     <string name="NAND">NAND</string>
     <string name="NOR">NOR</string>
     <string name="NXOR">NXOR</string>
-    <string name="FLIP">FLIP</string>
+    <string name="NOT">NOT</string>
     <string name="zero">0</string>
     <string name="one">1</string>
     <string name="two">2</string>
@@ -31,4 +35,5 @@
     <string name="e">E</string>
     <string name="f">F</string>
     <string name="unexpectedErrorMSG">Something went horribly wrong</string>
+    <string name="outOfBoundsError">Number not representable in precision</string>
 </resources>
