@@ -1,7 +1,7 @@
 package edu.blackburn.programmercalculator;
 
 /**
- * Created by Ashley Holcomb, Braydon Rekart, Jessica Cramer on 10/9/2017.
+ * Created by Ashley Holcomb, Braydon Rekart, Jessica Cramer, Hannah Goett on 10/9/2017.
  */
 
 public class Model {
@@ -22,7 +22,8 @@ public class Model {
             }
         } else {
             //buffer = the signed version of dec
-
+            int integer = Integer.parseInt(buffer, 2);
+            return Integer.toBinaryString(Integer.parseInt(this.not((integer + Integer.parseInt("1", 2)))));
         }
 
 
@@ -40,12 +41,26 @@ public class Model {
         return Integer.toString(~dec1);
     }
 
+    public String not(String num){
+        String notNum = "";
+        for(int i = num.length()-1; i<0; i++){
+            if(num.charAt(i) == '0'){
+                notNum +='1';
+            } else {
+                notNum += '0';
+            }
+        }
+        return notNum;
+    }
+
     public String xor(int dec1, int dec2){
         return Integer.toString(dec1 ^ dec2);
     }
 
     public String nor(int dec1, int dec2){
-        return this.not(this.or(dec1, dec2).);
+        return this.not(this.or(dec1, dec2));
     }
+
+
 
 }//end Model class
