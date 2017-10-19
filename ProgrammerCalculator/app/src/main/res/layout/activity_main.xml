@@ -375,7 +375,7 @@
             android:onClick="onPressBin"
             android:textAlignment="viewEnd" />
 
-        <EditText
+        <TextView
             android:id="@+id/DECText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -384,14 +384,12 @@
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/textView1"
             android:background="@android:color/transparent"
-            android:ems="10"
-            android:inputType="textPersonName"
             android:onClick="onPressDec"
-            android:text="DEC"
+            android:text="@string/DEC"
             android:textAlignment="center"
             android:textSize="15sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/HEXText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -400,14 +398,12 @@
             android:layout_below="@+id/DECText"
             android:layout_toEndOf="@+id/textView1"
             android:background="@android:color/transparent"
-            android:ems="10"
-            android:inputType="textPersonName"
             android:onClick="onPressHex"
-            android:text="HEX"
+            android:text="@string/HEX"
             android:textAlignment="center"
             android:textSize="15sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/OCTText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -416,14 +412,12 @@
             android:layout_below="@+id/textView2"
             android:layout_toEndOf="@+id/textView2"
             android:background="@android:color/transparent"
-            android:ems="10"
-            android:inputType="textPersonName"
             android:onClick="onPressOct"
-            android:text="OCT"
+            android:text="@string/OCT"
             android:textAlignment="center"
             android:textSize="15sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/BINText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -432,10 +426,8 @@
             android:layout_below="@+id/textView3"
             android:layout_toEndOf="@+id/textView3"
             android:background="@android:color/transparent"
-            android:ems="10"
-            android:inputType="textPersonName"
             android:onClick="onPressBin"
-            android:text="BIN"
+            android:text="@string/BIN"
             android:textAlignment="center"
             android:textSize="15sp" />
 
