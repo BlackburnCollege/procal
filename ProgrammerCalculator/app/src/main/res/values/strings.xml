@@ -36,4 +36,5 @@
     <string name="f">F</string>
     <string name="unexpectedErrorMSG">Something went horribly wrong</string>
     <string name="outOfBoundsError">Number not representable in precision</string>
+    <string name="DEL">DEL</string>
 </resources>
