@@ -386,6 +386,7 @@
             android:background="@android:color/transparent"
             android:ems="10"
             android:inputType="textPersonName"
+            android:onClick="onPressDec"
             android:text="DEC"
             android:textAlignment="center"
             android:textSize="15sp" />
@@ -401,6 +402,7 @@
             android:background="@android:color/transparent"
             android:ems="10"
             android:inputType="textPersonName"
+            android:onClick="onPressHex"
             android:text="HEX"
             android:textAlignment="center"
             android:textSize="15sp" />
@@ -416,6 +418,7 @@
             android:background="@android:color/transparent"
             android:ems="10"
             android:inputType="textPersonName"
+            android:onClick="onPressOct"
             android:text="OCT"
             android:textAlignment="center"
             android:textSize="15sp" />
@@ -431,6 +434,7 @@
             android:background="@android:color/transparent"
             android:ems="10"
             android:inputType="textPersonName"
+            android:onClick="onPressBin"
             android:text="BIN"
             android:textAlignment="center"
             android:textSize="15sp" />
