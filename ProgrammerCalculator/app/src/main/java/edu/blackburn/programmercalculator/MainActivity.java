@@ -1,10 +1,12 @@
 package edu.blackburn.programmercalculator;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     Model calculatorModel = new Model();
@@ -26,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onPressEqual(View view) {
+        Context context = getApplicationContext();
+        CharSequence text = "Tim doesn't know how to use Android Studio!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
     public void onPress4(View view) {
