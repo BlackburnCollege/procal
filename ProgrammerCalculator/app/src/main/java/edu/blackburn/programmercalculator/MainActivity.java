@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,12 +12,12 @@ public class MainActivity extends AppCompatActivity {
     Model calculatorModel = new Model();
     int bitPrecision;
     Boolean signed;
+    String inputMode;
 
-    TextView tvDEC;
-    TextView tvHEX;
-    TextView tvOCT;
-    TextView tvBIN;
-    Button bzero;
+    TextView tvDEC; // the textview that displays decimal values
+    TextView tvHEX; // the textview that displays hexadecimal values
+    TextView tvOCT; // the textview that displays octal values
+    TextView tvBIN; // the textview that displays binary values
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
         tvOCT = (TextView) findViewById((R.id.textViewOCT));
         tvBIN = (TextView) findViewById((R.id.textViewBIN));
 
-        bzero = (Button) findViewById(R.id.button0);
-
     }//end onCreate method
 
     public String getDecTextString(View view) {
@@ -40,12 +37,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getHexTextString() {
+        return tvHEX.getText().toString();
     }
 
     public void getOctTextString() {
+        return tvOCT.getText().toString();
     }
 
     public void getBinTextString() {
+        return tvBIN.getText().toString();
     }
 
     public void onPress0(View view) {
