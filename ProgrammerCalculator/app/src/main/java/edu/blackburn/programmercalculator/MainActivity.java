@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
     public void onPressXor(View view) {
     }
 
-    public void onPressNxor(View view) {
+    public void onPressXnor(View view) {
     }
 
     public void onPressAc(View view) {
