@@ -36,15 +36,15 @@ public class MainActivity extends AppCompatActivity {
         return tvDEC.getText().toString();
     }
 
-    public void getHexTextString() {
+    public String getHexTextString() {
         return tvHEX.getText().toString();
     }
 
-    public void getOctTextString() {
+    public String getOctTextString() {
         return tvOCT.getText().toString();
     }
 
-    public void getBinTextString() {
+    public String getBinTextString() {
         return tvBIN.getText().toString();
     }
 
