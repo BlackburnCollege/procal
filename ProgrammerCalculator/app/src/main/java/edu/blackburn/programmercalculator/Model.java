@@ -1,72 +1,122 @@
-package edu.blackburn.programmercalculator;
-
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package javaapplication2;
 
 /**
- * Created by Ashley Holcomb, Braydon Rekart, Jessica Cramer, Hannah Goett on 10/9/2017.
+ *
+ * @author ashley.holcomb
  */
-public class Model {
+public class JavaApplication2 {
 
-    public Model() {
+    private String calculateConversion(int dec, int bits, int base, boolean signed) {
+        JavaApplication2 myProgram = new JavaApplication2();
+        double convertTemp;
+        StringBuilder buffer = new StringBuilder();
+        String stuffing = "";
+        double tempPower; //because NetBeans is afraid of lossy conversions
 
-    }//end Model constructor
-
-    public String convertDecimalToBinary(int dec, int bitPrec, boolean signed) {
-        String buffer = Integer.toBinaryString(dec);
-
-        if (!signed) {
-
-            if (buffer.length() > bitPrec) {
-                return getString(R.string.outOfBoundsError) + ": " + bitPrec;
+        if (signed) {
+            convertTemp = Math.abs(dec);
+            if (dec >= 0) {
+                stuffing = "0";
             } else {
-                return buffer;
+                stuffing = "1";
             }
         } else {
-            //buffer = the signed version of dec
-            int integer = Integer.parseInt(buffer, 2);
-            return Integer.toBinaryString(Integer.parseInt(this.not((integer + Integer.parseInt("1", 2)))));
+            convertTemp = dec;
+        }
+        for (int i = bits - 1; i > -1; i--) {
+            tempPower = Math.pow(base, i);
+
+            if (convertTemp < tempPower) {
+                buffer.append("0");
+
+            } else {
+                buffer.append("1");
+                convertTemp = convertTemp - tempPower;
+            }
+            System.out.println(buffer);
         }
 
+        //If we don't have enough bits...
+        if (convertTemp > 0) {
+            return "NOPE";
+        }
 
-    }//end convertDecimalToBinary method
-
-    public String and(int dec1, int dec2) {
-        return Integer.toString(dec1 & dec2);
-    }
-
-    public String or(int dec1, int dec2) {
-        return Integer.toString(dec1 | dec2);
-    }
-
-    public String not(int dec1) {
-        return Integer.toString(~dec1);
-    }
-
-    public String not(String num) {
-        String notNum = "";
-        for (int i = num.length() - 1; i < 0; i++) {
-            if (num.charAt(i) == '0') {
-                notNum += '1';
-            } else {
-                notNum += '0';
+        if (signed) {
+            buffer.replace(0, buffer.length() - 1, myProgram.binaryAddition(myProgram.not(String.valueOf(buffer)), "1"));
+            //Gotta stuff it, already have appropriate "stuffing", now for bitPrec
+            System.out.println(buffer);
+            while (buffer.length() <= bits) {
+                buffer.append(stuffing);
             }
         }
-        return notNum;
+        return String.valueOf(buffer);
     }
 
-    public String xor(int dec1, int dec2) {
-        return Integer.toString(dec1 ^ dec2);
+    private String convertDecimalToBinary(int dec, int bitPrec, boolean signed) {
+        JavaApplication2 myProgram = new JavaApplication2();
+
+        String converted = myProgram.calculateConversion(dec, bitPrec, 2, signed);
+
+        if (converted.length() > bitPrec) {
+            return "NOPE";
+        } else {
+            return converted;
+        }
     }
 
-    public String nor(int dec1, int dec2) {
-        return this.not(this.or(dec1, dec2));
+    //https://stackoverflow.com/questions/8548586/adding-binary-numbers
+    public static String binaryAddition(String s1, String s2) {
+        if (s1 == null || s2 == null) {
+            return "";
+        }
+        int first = s1.length() - 1;
+        int second = s2.length() - 1;
+        StringBuilder sb = new StringBuilder();
+        int carry = 0;
+        while (first >= 0 || second >= 0) {
+            int sum = carry;
+            if (first >= 0) {
+                sum += s1.charAt(first) - '0';
+                first--;
+            }
+            if (second >= 0) {
+                sum += s2.charAt(second) - '0';
+                second--;
+            }
+            carry = sum >> 1;
+            sum = sum & 1;
+            sb.append(sum == 0 ? '0' : '1');
+        }
+        if (carry > 0) {
+            sb.append('1');
+        }
+
+        sb.reverse();
+        return String.valueOf(sb);
     }
 
-    private String getString(int stringID) {
-        return Resources.getSystem().getString(stringID);
+    private String not(String input) {
+
+        input = input.replace('1', 'x');
+        input = input.replace('0', '1');
+        input = input.replace('x', '0');
+
+        return input;
     }
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        JavaApplication2 myProgram = new JavaApplication2();
 
-}//end Model class
+        System.out.println(myProgram.convertDecimalToBinary(7, 8, true));
+
+    }
+
+}
