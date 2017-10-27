@@ -1,4 +1,4 @@
-package javaapplication2;
+package edu.blackburn.programmercalculator;
 
 /**
  * [Super] Model(s) Class
