@@ -1,16 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package javaapplication2;
 
 /**
+ * [Super] Model(s) Class
  *
- * @author ashley.holcomb
+ * @author Ashley Holcomb & Drew Hans
  */
-public class JavaApplication2 {
+public class Model {
 
+    /**
     private String calculateConversion(int dec, int bits, int base, boolean signed) {
         JavaApplication2 myProgram = new JavaApplication2();
         double convertTemp;
@@ -68,6 +65,235 @@ public class JavaApplication2 {
             return converted;
         }
     }
+    
+    */
+
+    /**
+     * convertBase10toBase2 Method
+     *
+     * @param decNum - assume a 32bit integer decimal number
+     * @param bitPrecision - a bit precision in range 8 - 32
+     * @param signed - a boolean that indicates two's compliment conversion
+     * @return
+     */
+    public String convertBase10toBase2(int decNum, int bitPrecision, boolean signed) {
+        String buffer = "";
+
+        if (isWithinBounds(decNum, 2, bitPrecision, signed)) {
+            if (decNum < 0) {
+                // get signed value 
+                // subtract one then flip the bits (reverse order of "flip the bits and add one" method we learned)
+                buffer = flipBits(Integer.toString(((-1) * decNum) - 1, 2));
+
+                // pad the signed value with ones up to bitPrecision
+                buffer = String.format("%" + bitPrecision + "s", buffer).replace(' ', '1');
+
+            } else {
+                // get the unsigned value
+                buffer = Integer.toString(decNum, 2); // large positive numbers overflow on the leftmost bit so this works
+
+                // pad the unsigned value with zeros up to bitPrecision
+                buffer = String.format("%" + bitPrecision + "s", buffer).replace(' ', '0');
+            }
+        } else {
+            buffer = "Err: Number out of bounds";
+        }
+
+        return buffer;
+    }//end convertBase10toBase2 method
+
+    /**
+     * convertBase10toBase8 Method
+     *
+     * @param decNum - assume a 32bit integer decimal number
+     * @param bitPrecision - a bit precision in range 8 - 32
+     * @param signed - a boolean that indicates two's compliment conversion
+     * @return
+     */
+    public String convertBase10toBase8(int decNum, int bitPrecision, boolean signed) {
+        String buffer = "";
+        String base2Value = convertBase10toBase2(decNum, bitPrecision, signed);
+
+        // pad with appropriate bit to get a clean base conversion
+        // might cause problems when base2Value is Err
+        while (base2Value.length() % 3 != 0) {
+            if (signed && decNum < 0) {
+                base2Value = "1" + base2Value;
+            } else {
+                base2Value = "0" + base2Value;
+            }
+        }
+
+        String temp = "";
+        char[] bits = base2Value.toCharArray();
+
+        // substitute every 3 bits with their octal value (note: Err msgs remain unchanged)
+        for (int i = 0; i < bits.length; i++) {
+            temp = temp + bits[i];
+
+            if (temp.equalsIgnoreCase("111")) {
+                buffer = buffer + "7";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("110")) {
+                buffer = buffer + "6";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("101")) {
+                buffer = buffer + "5";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("100")) {
+                buffer = buffer + "4";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("011")) {
+                buffer = buffer + "3";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("010")) {
+                buffer = buffer + "2";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("001")) {
+                buffer = buffer + "1";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("000")) {
+                buffer = buffer + "0";
+                temp = "";
+            } else {
+                // do nothing
+            }
+        }
+
+        if (buffer.equalsIgnoreCase("")) {
+            buffer = base2Value;
+        }
+
+        return buffer;
+    }//end convertBase10toBase8 method
+
+    /**
+     * convertBase10toBase16 Method
+     *
+     * @param decNum - assume a 32bit integer decimal number
+     * @param bitPrecision - a bit precision in range 8 - 32
+     * @param signed - a boolean that indicates two's compliment conversion
+     * @return
+     */
+    public String convertBase10toBase16(int decNum, int bitPrecision, boolean signed) {
+        String buffer = "";
+        String base2Value = convertBase10toBase2(decNum, bitPrecision, signed);
+
+        // pad with appropriate bit to get a clean base conversion
+        // might cause problems when base2Value is Err
+        while (base2Value.length() % 4 != 0) {
+            if (signed && decNum < 0) {
+                base2Value = "1" + base2Value;
+            } else {
+                base2Value = "0" + base2Value;
+            }
+        }
+
+        String temp = "";
+        char[] bits = base2Value.toCharArray();
+
+        // substitute every 4 bits with their octal value (note: Err msgs remain unchanged)
+        for (int i = 0; i < bits.length; i++) {
+            temp = temp + bits[i];
+
+            if (temp.equalsIgnoreCase("1111")) {
+                buffer = buffer + "F";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("1110")) {
+                buffer = buffer + "E";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("1101")) {
+                buffer = buffer + "D";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("1100")) {
+                buffer = buffer + "C";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("1011")) {
+                buffer = buffer + "B";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("1010")) {
+                buffer = buffer + "A";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("1001")) {
+                buffer = buffer + "9";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("1000")) {
+                buffer = buffer + "8";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("0111")) {
+                buffer = buffer + "7";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("0110")) {
+                buffer = buffer + "6";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("0101")) {
+                buffer = buffer + "5";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("0100")) {
+                buffer = buffer + "4";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("0011")) {
+                buffer = buffer + "3";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("0010")) {
+                buffer = buffer + "2";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("0001")) {
+                buffer = buffer + "1";
+                temp = "";
+            } else if (temp.equalsIgnoreCase("0000")) {
+                buffer = buffer + "0";
+                temp = "";
+            } else {
+                // do nothing
+            }
+        }
+
+        if (buffer.equalsIgnoreCase("")) {
+            buffer = base2Value;
+        }
+
+        return buffer;
+    }//end convertBase10toBase16 method
+
+    /**
+     * isWithinBounds Method
+     *
+     * @param decNum - a base 10 number
+     * @param base - the base we want to convert decNum to
+     * @param bitprecision - the number of bits we have to represent decNum in new base
+     * @param signed - true if we want the representation to be signed
+     * @return true if decNum is within upper and lower bounds
+     */
+    private boolean isWithinBounds(int decNum, int base, int bitprecision, boolean signed) {
+        //store upper and lower bounds as 64 bit numbers to avoid overflow
+        long upperBound;
+        long lowerBound;
+
+        if (signed) {
+            upperBound = (long) (Math.pow(base, bitprecision - 1) - 1);
+            lowerBound = (long) (Math.pow(base, bitprecision - 1) * -1);
+        } else {
+            upperBound = (long) (Math.pow(base, bitprecision) - 1);
+            lowerBound = 0;
+        }
+
+        return (decNum <= upperBound) && (decNum >= lowerBound);
+    }//end isWithinBounds method
+
+    /**
+     * flipBits Method
+     *
+     * @param binNum - assume a String of 1s and 0s
+     * @return flipped bit version of binNum
+     */
+    private String flipBits(String binNum) {
+        String flipped = binNum;
+        flipped = flipped.replace("0", " "); // temporarily set 0s to spaces
+        flipped = flipped.replace("1", "0"); // set 1s to 0s
+        flipped = flipped.replace(" ", "1"); // set 1s to 0s
+        return flipped;
+    }//end flipBits method
 
     //https://stackoverflow.com/questions/8548586/adding-binary-numbers
     public static String binaryAddition(String s1, String s2) {
