@@ -15,7 +15,7 @@ public class Model {
     }//end Model constructor
 
     /**
-     * convertBase10toBase2 Method
+     * convertBase2toBase10 Method
      *
      * @param binNumString - assume a String of 1s and 0s with length bitPrecision
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
