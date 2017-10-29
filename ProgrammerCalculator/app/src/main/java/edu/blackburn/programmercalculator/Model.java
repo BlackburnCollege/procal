@@ -7,12 +7,37 @@ package edu.blackburn.programmercalculator;
  */
 public class Model {
 
+    private final String ERRMSG;
+
     /**
-     * Model Constructor - it's here if we need it, but we probably won't :P
+     * Model Constructor
      */
     public Model() {
-
+        // storing the errmsg in one place makes debugging easier
+        ERRMSG = "Err: Number out of mode bounds";
     }//end Model constructor
+
+    /**
+     * convertBase2toBase8 Method
+     *
+     * @param binNumString - assume a String of 1s and 0s with length bitPrecision
+     * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
+     * @param signed - a boolean that indicates two's compliment conversion
+     * @return a string base8 representation of binNum or an error
+     */
+    public String convertBase2toBase8(String binNumString, int bitPrecision, boolean signed) {
+        String buffer = "";
+        String base10Value = convertBase2toBase10(binNumString, bitPrecision, signed);
+
+        // check for Err msg
+        if (base10Value.equalsIgnoreCase(ERRMSG)) {
+            buffer = base10Value;
+        } else {
+            buffer = convertBase10toBase8(base10Value, bitPrecision, signed);
+        }
+
+        return buffer;
+    }//end convertBase2toBase8
 
     /**
      * convertBase2toBase10 Method
@@ -24,48 +49,51 @@ public class Model {
      */
     public String convertBase2toBase10(String binNumString, int bitPrecision, boolean signed) {
         String buffer = "";
+        int temp = 0;
 
         // check that binary input does not exceed our bitPrecision
         if (binNumString.length() <= bitPrecision) {
-            int temp = 0;
+            // pad with zeros when necessary (assume user forgot to input zeros for positive signed value)
+            binNumString = String.format("%" + bitPrecision + "s", binNumString).replace(' ', '0');
+
             if (signed && binNumString.charAt(0) == '1') {
                 // if negative signed
-
-                // pad the signed value with ones up to bitPrecision
-                binNumString = String.format("%" + bitPrecision + "s", binNumString).replace(' ', '1');
-
                 // calculate the base 10 value of binNumString
-                temp = (-1) * (unsignedBinaryStringToPositiveDecimalInt(flipBits(binNumString)) - 1);
-
+                temp = (unsignedBinaryStringToPositiveDecimalInt(not(binNumString)) - 1);
                 buffer = Integer.toString(temp);
-                
             } else {
                 // if positive signed or unsigned
-
-                // pad the signed value with zeros up to bitPrecision
-                binNumString = String.format("%" + bitPrecision + "s", binNumString).replace(' ', '0');
-
                 // calculate the unsigned base 10 value of binNumString
                 temp = unsignedBinaryStringToPositiveDecimalInt(binNumString);
                 buffer = Integer.toString(temp);
             }
         } else {
-            buffer = "Err: Number out of bounds";
+            buffer = ERRMSG;
         }
         return buffer;
     }//end convertBase2toBase10
 
-    private int unsignedBinaryStringToPositiveDecimalInt(String binString) {
-        int temp = 0;
-        char[] bits = binString.toCharArray();
+    /**
+     * convertBase2toBase16 Method
+     *
+     * @param binNumString - assume a String of 1s and 0s with length bitPrecision
+     * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
+     * @param signed - a boolean that indicates two's compliment conversion
+     * @return a string base16 representation of binNum or an error
+     */
+    public String convertBase2toBase16(String binNumString, int bitPrecision, boolean signed) {
+        String buffer = "";
+        String base10Value = convertBase2toBase10(binNumString, bitPrecision, signed);
 
-        for (int i = 0; i < bits.length; i++) {
-            if (bits[i] == '1') {
-                temp = temp + (int) (Math.pow(2, bits.length - i - 1));
-            }
+        // check for Err msg
+        if (base10Value.equalsIgnoreCase(ERRMSG)) {
+            buffer = base10Value;
+        } else {
+            buffer = convertBase10toBase16(base10Value, bitPrecision, signed);
         }
-        return temp;
-    }//end unsignedBinaryStringToPositiveDecimalInt method
+
+        return buffer;
+    }//end convertBase2toBase16
 
     /**
      * convertBase10toBase2 Method
@@ -81,21 +109,23 @@ public class Model {
         if (isWithinBounds(decNum, bitPrecision, signed)) {
             if (decNum < 0) {
                 // get signed value 
-                // subtract one then flip the bits (reverse order of "flip the bits and add one" method we learned)
-                buffer = flipBits(Integer.toString(((-1) * decNum) - 1, 2));
+
+                // take the positive of decNum, subtract one, then get unsigned binary representation
+                buffer = positiveDecimalIntToUnsignedBinaryString((decNum * (-1)) - 1);
+                buffer = not(buffer);
 
                 // pad the signed value with ones up to bitPrecision
                 buffer = String.format("%" + bitPrecision + "s", buffer).replace(' ', '1');
 
             } else {
                 // get the unsigned value
-                buffer = Integer.toString(decNum, 2); // large positive numbers overflow on the leftmost bit so this works
+                buffer = positiveDecimalIntToUnsignedBinaryString(decNum);
 
                 // pad the unsigned value with zeros up to bitPrecision
                 buffer = String.format("%" + bitPrecision + "s", buffer).replace(' ', '0');
             }
         } else {
-            buffer = "Err: Number out of mode bounds";
+            buffer = ERRMSG;
         }
 
         return buffer;
@@ -118,7 +148,7 @@ public class Model {
         String base2Value = convertBase10toBase2(decNum, bitPrecision, signed);
 
         // check for Err msg
-        if (base2Value.equalsIgnoreCase("Err: Number out of bounds")) {
+        if (base2Value.equalsIgnoreCase(ERRMSG)) {
             // then store Err msg in buffer and return immediately
             buffer = base2Value;
         } else {
@@ -191,7 +221,7 @@ public class Model {
         String base2Value = convertBase10toBase2(decNum, bitPrecision, signed);
 
         // check for Err msg
-        if (base2Value.equalsIgnoreCase("Err: Number out of bounds")) {
+        if (base2Value.equalsIgnoreCase(ERRMSG)) {
             // then store Err msg in buffer and return immediately
             buffer = base2Value;
         } else {
@@ -275,43 +305,17 @@ public class Model {
         return convertBase10toBase16(Integer.parseInt(decNumString), bitPrecision, signed);
     }//end convertBase10toBase16 method
 
-    /**
-     * isWithinBounds Method
-     *
-     * @param decNum - a base 10 number
-     * @param bitprecision - the number of binary bits we have to represent decNum
-     * @param signed - true if we want the representation to be signed
-     * @return true if decNum is within upper and lower bounds
-     */
-    private boolean isWithinBounds(int decNum, int bitPrecision, boolean signed) {
-        //store upper and lower bounds as 64 bit numbers to avoid overflow
-        long upperBound;
-        long lowerBound;
+    private int unsignedBinaryStringToPositiveDecimalInt(String binString) {
+        int temp = 0;
+        char[] bits = binString.toCharArray();
 
-        if (signed) {
-            upperBound = (long) (Math.pow(2, bitPrecision - 1) - 1);
-            lowerBound = (long) (Math.pow(2, bitPrecision - 1) * -1);
-        } else {
-            upperBound = (long) (Math.pow(2, bitPrecision) - 1);
-            lowerBound = 0;
+        for (int i = 0; i < bits.length; i++) {
+            if (bits[i] == '1') {
+                temp = temp + (int) (Math.pow(2, bits.length - i - 1));
+            }
         }
-
-        return (decNum <= upperBound) && (decNum >= lowerBound);
-    }//end isWithinBounds method
-
-    /**
-     * flipBits Method
-     *
-     * @param binNum - assume a String of 1s and 0s
-     * @return flipped bit version of binNum
-     */
-    private String flipBits(String binNum) {
-        String flipped = binNum;
-        flipped = flipped.replace("0", " "); // temporarily set 0s to spaces
-        flipped = flipped.replace("1", "0"); // set 1s to 0s
-        flipped = flipped.replace(" ", "1"); // set spaces to 1s
-        return flipped;
-    }//end flipBits method
+        return temp;
+    }//end unsignedBinaryStringToPositiveDecimalInt method
 
     /**
      * binaryAddition Method - https://stackoverflow.com/questions/8548586/adding-binary-numbers
@@ -320,7 +324,7 @@ public class Model {
      * @param s2
      * @return
      */
-    public static String binaryAddition(String s1, String s2) {
+    public String binaryAddition(String s1, String s2) {
         if (s1 == null || s2 == null) {
             return "";
         }
@@ -353,17 +357,56 @@ public class Model {
     /**
      * not Method
      *
-     * @param input - assume a String of 1s and 0s
-     * @return
+     * @param binNum - assume a String of 1s and 0s
+     * @return flipped bit version of binNum
      */
-    private String not(String input) {
+    public String not(String binNum) {
+        binNum = binNum.replace("0", "x"); // temporarily set 0s to xs
+        binNum = binNum.replace("1", "0"); // set 1s to 0s
+        binNum = binNum.replace("x", "1"); // set xs to 1s
+        return binNum;
+    }//end not method
 
-        input = input.replace('1', 'x');
-        input = input.replace('0', '1');
-        input = input.replace('x', '0');
+    private String positiveDecimalIntToUnsignedBinaryString(int decNum) {
+        String buffer = "";
+        int remainder = 0;
 
-        return input;
-    }//end not class
+        if (decNum == 0) {
+            buffer = "0";
+        } else {
+            while (decNum > 0) {
+                remainder = decNum % 2;
+                buffer = remainder + buffer;
+                decNum = decNum / 2;
+            }//end while loop
+        }
+
+        return buffer;
+    }//end positiveDecimalIntToUnsignedBinaryString method
+
+    /**
+     * isWithinBounds Method
+     *
+     * @param decNum - a base 10 number
+     * @param bitprecision - the number of binary bits we have to represent decNum
+     * @param signed - true if we want the representation to be signed
+     * @return true if decNum is within upper and lower bounds
+     */
+    private boolean isWithinBounds(int decNum, int bitPrecision, boolean signed) {
+        //store upper and lower bounds as 64 bit numbers to avoid overflow
+        long upperBound;
+        long lowerBound;
+
+        if (signed) {
+            upperBound = (long) (Math.pow(2, bitPrecision - 1) - 1);
+            lowerBound = (long) (Math.pow(2, bitPrecision - 1) * -1);
+        } else {
+            upperBound = (long) (Math.pow(2, bitPrecision) - 1);
+            lowerBound = 0;
+        }
+
+        return (decNum <= upperBound) && (decNum >= lowerBound);
+    }//end isWithinBounds method
 
     /*
     // This block of commented out code is left over from Monday October 23rd's session
@@ -374,7 +417,6 @@ public class Model {
         StringBuilder buffer = new StringBuilder();
         String stuffing = "";
         double tempPower; //because NetBeans is afraid of lossy conversions
-
         if (signed) {
             convertTemp = Math.abs(dec);
             if (dec >= 0) {
@@ -387,22 +429,18 @@ public class Model {
         }
         for (int i = bits - 1; i > -1; i--) {
             tempPower = Math.pow(base, i);
-
             if (convertTemp < tempPower) {
                 buffer.append("0");
-
             } else {
                 buffer.append("1");
                 convertTemp = convertTemp - tempPower;
             }
             System.out.println(buffer);
         }
-
         //If we don't have enough bits...
         if (convertTemp > 0) {
             return "NOPE";
         }
-
         if (signed) {
             buffer.replace(0, buffer.length() - 1, myProgram.binaryAddition(myProgram.not(String.valueOf(buffer)), "1"));
             //Gotta stuff it, already have appropriate "stuffing", now for bitPrec
@@ -413,12 +451,9 @@ public class Model {
         }
         return String.valueOf(buffer);
     }
-
     private String convertDecimalToBinary(int dec, int bitPrec, boolean signed) {
         JavaApplication2 myProgram = new JavaApplication2();
-
         String converted = myProgram.calculateConversion(dec, bitPrec, 2, signed);
-
         if (converted.length() > bitPrec) {
             return "NOPE";
         } else {
