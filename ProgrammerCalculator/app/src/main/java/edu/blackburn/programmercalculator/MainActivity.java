@@ -123,11 +123,11 @@ public class MainActivity extends AppCompatActivity {
             updateTextViews(); // update TextViews only on legal button presses
 
         } else if (inputMode == getString(R.string.DEC) && legalDecInputs.contains(buttonValue)) {
-            tvOCT.setText(tvDEC.getText().toString() + buttonValue);
+            tvDEC.setText(tvDEC.getText().toString() + buttonValue);
             updateTextViews(); // update TextViews only on legal button presses
 
         } else if (inputMode == getString(R.string.HEX) && legalHexInputs.contains(buttonValue)) {
-            tvOCT.setText(tvHEX.getText().toString() + buttonValue);
+            tvHEX.setText(tvHEX.getText().toString() + buttonValue);
             updateTextViews(); // update TextViews only on legal button presses
 
         }
