@@ -735,7 +735,7 @@ public class Model {
      * @param dec2 - second addend
      * @return sum
      */
-    public String add(String dec1, String dec2){
+    public String add(String dec1, String dec2) {
         int num1 = Integer.parseInt(dec1);
         int num2 = Integer.parseInt(dec2);
 
@@ -749,7 +749,7 @@ public class Model {
      * @param dec2 - subtrahend
      * @return difference
      */
-    public String subtract(String dec1, String dec2){
+    public String sub(String dec1, String dec2) {
         int num1 = Integer.parseInt(dec1);
         int num2 = Integer.parseInt(dec2);
 
@@ -758,11 +758,12 @@ public class Model {
 
     /**
      * Takes in two decimal numbers as Strings and returns the product as a String
+     *
      * @param dec1 - first factor
      * @param dec2 - second factor
      * @return product
      */
-    public String multiply(String dec1, String dec2){
+    public String mul(String dec1, String dec2) {
         int num1 = Integer.parseInt(dec1);
         int num2 = Integer.parseInt(dec2);
 
@@ -776,7 +777,7 @@ public class Model {
      * @param dec2 - divisor
      * @return quotient
      */
-    public String divide(String dec1, String dec2){
+    public String div(String dec1, String dec2) {
         int num1 = Integer.parseInt(dec1);
         int num2 = Integer.parseInt(dec2);
 
@@ -790,7 +791,7 @@ public class Model {
      * @param dec2 - divisor
      * @return quotient
      */
-    public String mod(String dec1, String dec2){
+    public String mod(String dec1, String dec2) {
         int num1 = Integer.parseInt(dec1);
         int num2 = Integer.parseInt(dec2);
 
@@ -805,10 +806,10 @@ public class Model {
      * @param input2 - second binary number
      * @return bitwise AND of input1 and input2 as a String
      */
-    public String and(String input1, String input2){
+    public String and(String input1, String input2) {
         String largest = input2;
         String smallest = input1;
-        if(input2.length()<shortest){
+        if (input2.length() < smallest.length()) {
             largest = input1;
             smallest = input2;
         }
@@ -816,7 +817,7 @@ public class Model {
 
         String buffer = "";
         for (int i = 0; i < smallest.length(); i++) {
-            if(largest.charAt(i)=='1' && smallest.charAt(i)=='1' ){
+            if (largest.charAt(i) == '1' && smallest.charAt(i) == '1') {
                 buffer = buffer + "1";
             } else {
                 buffer = buffer + "0";
@@ -833,10 +834,10 @@ public class Model {
      * @param input2 - second binary number
      * @return bitwise OR of input1 and input2 as a String
      */
-    public String or(String input1, String input2){
+    public String or(String input1, String input2) {
         String largest = input2;
         String smallest = input1;
-        if(input2.length()<smallest.length()){
+        if (input2.length() < smallest.length()) {
             largest = input1;
             smallest = input2;
         }
@@ -844,7 +845,7 @@ public class Model {
 
         String buffer = "";
         for (int i = 0; i < smallest.length(); i++) {
-            if(largest.charAt(i)=='1' || smallest.charAt(i)=='1' ){
+            if (largest.charAt(i) == '1' || smallest.charAt(i) == '1') {
                 buffer = buffer + "1";
             } else {
                 buffer = buffer + "0";
@@ -861,10 +862,10 @@ public class Model {
      * @param input2 - second binary number
      * @return bitwise XOR of input1 and input2 as a String
      */
-    public String xor(String input1, String input2){
+    public String xor(String input1, String input2) {
         String largest = input2;
         String smallest = input1;
-        if(input2.length()<smallest.length()){
+        if (input2.length() < smallest.length()) {
             largest = input1;
             smallest = input2;
         }
@@ -872,7 +873,7 @@ public class Model {
 
         String buffer = "";
         for (int i = 0; i < smallest.length(); i++) {
-            if(largest.charAt(i)=='1' ^ smallest.charAt(i)=='1' ){
+            if (largest.charAt(i) == '1' ^ smallest.charAt(i) == '1') {
                 buffer = buffer + "1";
             } else {
                 buffer = buffer + "0";
@@ -889,7 +890,7 @@ public class Model {
      * @param input2 - second binary number
      * @return bitwise NAND of input1 and input2 as a String
      */
-    public String nand(String input1, String input2){
+    public String nand(String input1, String input2) {
         return this.not(this.and(input1, input2));
     }
 
@@ -901,7 +902,7 @@ public class Model {
      * @param input2 - second binary number
      * @return bitwise NOR of input1 and input2 as a String
      */
-    public String nor(String input1, String input2){
+    public String nor(String input1, String input2) {
         return this.not(this.or(input1, input2));
     }
 
@@ -913,7 +914,7 @@ public class Model {
      * @param input2 - second binary number
      * @return bitwise XNOR of input1 and input2 as a String
      */
-    public String xnor(String input1, String input2){
+    public String xnor(String input1, String input2) {
         return this.not(this.xor(input1, input2));
     }
 
