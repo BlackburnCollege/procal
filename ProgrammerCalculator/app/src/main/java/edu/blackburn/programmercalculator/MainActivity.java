@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity
             updateTextViews(); // update TextViews only on legal button presses
 
         } else if (inputMode.equalsIgnoreCase(getString(R.string.OCT)) && legalOctInputs.contains(buttonValue)) {
-            buffer = tvBIN.getText().toString() + buttonValue;
+            buffer = tvOCT.getText().toString() + buttonValue;
             tvOCT.setText(buffer);
             updateTextViews(); // update TextViews only on legal button presses
 
