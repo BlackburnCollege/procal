@@ -233,11 +233,13 @@ public class Model {
      */
     public String convertBase8toBase2(String octString, int bitPrecision, boolean signed) {
         String buffer = "";
+        String legal2BitOct = "23";
+        String legal1BitOct = "01";
         int octStringBits = (octString.length() * 3); // assume each octal value uses all three bits
 
-        if (octString.charAt(0) == '3' || octString.charAt(0) == '2') {
+        if (legal2BitOct.contains(String.valueOf(octString.charAt(0)))) {
             octStringBits = octStringBits - 1; // the leftmost bit is unused so ignore it
-        } else if (octString.charAt(0) == '1' || octString.charAt(0) == '0') {
+        } else if (legal1BitOct.contains(String.valueOf(octString.charAt(0)))) {
             octStringBits = octStringBits - 2; // the two leftmost bits are unused so ignore them
         }
 
@@ -248,18 +250,8 @@ public class Model {
             // initialize variable for the for-loop
             char[] bits = octString.toCharArray();
 
-            if (bits[0] == '3') {
-                buffer = buffer + "11"; // append 11
-            } else if (bits[0] == '2') {
-                buffer = buffer + "10"; // append 10
-            } else if (bits[0] == '1') {
-                buffer = buffer + "1"; // append 1
-            } else if (bits[0] == '0') {
-                buffer = buffer + "0"; // append 0
-            }
-
-            // substitute every octal value after index 0 with their 3 bit binary value
-            for (int i = 1; i < bits.length; i++) {
+            // substitute every hexadecimal value with the approriate binary value
+            for (int i = 0; i < bits.length; i++) {
 
                 if (bits[i] == '7') {
                     buffer = buffer + "111"; // append 111
@@ -270,17 +262,33 @@ public class Model {
                 } else if (bits[i] == '4') {
                     buffer = buffer + "100"; // append 100
                 } else if (bits[i] == '3') {
-                    buffer = buffer + "011"; // append 011
+                    if (i == 0) {
+                        buffer = buffer + "11"; // append 11
+                    } else {
+                        buffer = buffer + "011"; // append 011
+                    }
                 } else if (bits[i] == '2') {
-                    buffer = buffer + "010"; // append 010
+                    if (i == 0) {
+                        buffer = buffer + "10"; // append 10
+                    } else {
+                        buffer = buffer + "010"; // append 010
+                    }
                 } else if (bits[i] == '1') {
-                    buffer = buffer + "001"; // append 001
+                    if (i == 0) {
+                        buffer = buffer + "1"; // append 1
+                    } else {
+                        buffer = buffer + "001"; // append 001
+                    }
                 } else if (bits[i] == '0') {
-                    buffer = buffer + "000"; // append 000
-                }
+                    if (i == 0) {
+                        buffer = buffer + "0"; // append 0
+                    } else {
+                        buffer = buffer + "000"; // append 000
+                    }
+                }//end if else statement
             }//end for loop
 
-            // pad with leftmost bit
+            // pad with zeros when necessary (assume user forgot to input zeros for positive signed value)
             buffer = String.format("%" + bitPrecision + "s", buffer).replace(' ', buffer.charAt(0));
 
         }//end if else statement
@@ -451,7 +459,6 @@ public class Model {
         return convertBase10toBase16(Integer.parseInt(decString), bitPrecision, signed);
     }//end convertBase10toBase16 method
 
-
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////// convertBase16toBase* Methods /////////////////////////////////
 
@@ -465,50 +472,94 @@ public class Model {
      */
     public String convertBase16toBase2(String hexString, int bitPrecision, boolean signed) {
         String buffer = "";
+        String legal3BitHex = "4567";
+        String legal2BitHex = "23";
+        String legal1BitHex = "01";
+        int hexStringBits = (hexString.length() * 4); // assume each hexadecimal value uses all four bits
+
+        if (legal3BitHex.contains(String.valueOf(hexString.charAt(0)))) {
+            hexStringBits = hexStringBits - 1; // the leftmost bit is unused so ignore it
+        } else if (legal2BitHex.contains(String.valueOf(hexString.charAt(0)))) {
+            hexStringBits = hexStringBits - 2; // the two leftmost bits are unused so ignore them
+        } else if (legal1BitHex.contains(String.valueOf(hexString.charAt(0)))) {
+            hexStringBits = hexStringBits - 3; // the three leftmost bits are unused so ignore them
+        }
 
         // check that hexString does not exceed our base2 bitPrecision
-        if ((hexString.length() * 4) > bitPrecision) {
+        if (hexStringBits > bitPrecision) {
             buffer = ERRMSG;
         } else {
             // initialize variable for the for-loop
             char[] bits = hexString.toCharArray();
 
-            // substitute every hexadecimal value with their 4 bit binary value
-            for (char bit : bits) {
+            // substitute every hexadecimal value with the approriate binary value
+            for (int i = 0; i < bits.length; i++) {
 
-                if (bit == 'F') {
+                if (bits[i] == 'F') {
                     buffer = buffer + "1111"; // append 1111
-                } else if (bit == 'E') {
+                } else if (bits[i] == 'E') {
                     buffer = buffer + "1110"; // append 1110
-                } else if (bit == 'D') {
+                } else if (bits[i] == 'D') {
                     buffer = buffer + "1101"; // append 1101
-                } else if (bit == 'C') {
+                } else if (bits[i] == 'C') {
                     buffer = buffer + "1100"; // append 1100
-                } else if (bit == 'B') {
+                } else if (bits[i] == 'B') {
                     buffer = buffer + "1011"; // append 1011
-                } else if (bit == 'A') {
+                } else if (bits[i] == 'A') {
                     buffer = buffer + "1010"; // append 1010
-                } else if (bit == '9') {
+                } else if (bits[i] == '9') {
                     buffer = buffer + "1001"; // append 1001
-                } else if (bit == '8') {
+                } else if (bits[i] == '8') {
                     buffer = buffer + "1000"; // append 1000
-                } else if (bit == '7') {
-                    buffer = buffer + "0111"; // append 0111
-                } else if (bit == '6') {
-                    buffer = buffer + "0110"; // append 0110
-                } else if (bit == '5') {
-                    buffer = buffer + "0101"; // append 0101
-                } else if (bit == '4') {
-                    buffer = buffer + "0100"; // append 0100
-                } else if (bit == '3') {
-                    buffer = buffer + "0011"; // append 0011
-                } else if (bit == '2') {
-                    buffer = buffer + "0010"; // append 0010
-                } else if (bit == '1') {
-                    buffer = buffer + "0001"; // append 0001
-                } else if (bit == '0') {
-                    buffer = buffer + "0000"; // append 0000
-                }
+                } else if (bits[i] == '7') {
+                    if (i == 0) {
+                        buffer = buffer + "111"; // append 111
+                    } else {
+                        buffer = buffer + "0111"; // append 0111
+                    }
+                } else if (bits[i] == '6') {
+                    if (i == 0) {
+                        buffer = buffer + "110"; // append 110
+                    } else {
+                        buffer = buffer + "0110"; // append 0110
+                    }
+                } else if (bits[i] == '5') {
+                    if (i == 0) {
+                        buffer = buffer + "101"; // append 101
+                    } else {
+                        buffer = buffer + "0101"; // append 0101
+                    }
+                } else if (bits[i] == '4') {
+                    if (i == 0) {
+                        buffer = buffer + "100"; // append 100
+                    } else {
+                        buffer = buffer + "0100"; // append 0100
+                    }
+                } else if (bits[i] == '3') {
+                    if (i == 0) {
+                        buffer = buffer + "11"; // append 11
+                    } else {
+                        buffer = buffer + "0011"; // append 0011
+                    }
+                } else if (bits[i] == '2') {
+                    if (i == 0) {
+                        buffer = buffer + "10"; // append 10
+                    } else {
+                        buffer = buffer + "0010"; // append 0010
+                    }
+                } else if (bits[i] == '1') {
+                    if (i == 0) {
+                        buffer = buffer + "1"; // append 1
+                    } else {
+                        buffer = buffer + "0001"; // append 0001
+                    }
+                } else if (bits[i] == '0') {
+                    if (i == 0) {
+                        buffer = buffer + "0"; // append 0
+                    } else {
+                        buffer = buffer + "0000"; // append 0000
+                    }
+                }//end if else statement
             }//end for loop
 
             // pad with zeros when necessary (assume user forgot to input zeros for positive signed value)
@@ -679,7 +730,7 @@ public class Model {
 
     /*
     // This block of commented out code is left over from Monday October 23rd's session
-    
+
     private String calculateConversion(int dec, int bits, int base, boolean signed) {
         JavaApplication2 myProgram = new JavaApplication2();
         double convertTemp;
@@ -729,6 +780,6 @@ public class Model {
             return converted;
         }
     }
-    
+
      */
 }//end Model class

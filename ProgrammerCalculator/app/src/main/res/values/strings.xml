@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">ProgrammerCalculator</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
     <string name="allClear">AC</string>
     <string name="DEC">DEC</string>
     <string name="HEX">HEX</string>
@@ -34,7 +37,6 @@
     <string name="d">D</string>
     <string name="e">E</string>
     <string name="f">F</string>
-    <string name="unexpectedErrorMSG">Something went horribly wrong</string>
-    <string name="outOfBoundsError">Number not representable in precision</string>
     <string name="DEL">DEL</string>
 </resources>
+

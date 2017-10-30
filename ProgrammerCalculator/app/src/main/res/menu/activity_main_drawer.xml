@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/mode_32bitunsigned"
+            android:title="32-bit Unsigned" />
+        <item
+            android:id="@+id/mode_32bitsigned"
+            android:title="32-bit Signed" />
+        <item
+            android:id="@+id/mode_16bitunsigned"
+            android:title="16-bit Unsigned" />
+        <item
+            android:id="@+id/mode_16bitsigned"
+            android:title="16-bit Signed" />
+        <item
+            android:id="@+id/mode_8bitunsigned"
+            android:title="8-bit Unsigned" />
+        <item
+            android:id="@+id/mode_8bitsigned"
+            android:title="8-bit Signed" />
+
+    </group>
+</menu>
