@@ -3,7 +3,11 @@ package edu.blackburn.programmercalculator;
 /**
  * [Super] Model(s) Class
  *
- * @authors Ashley Holcomb, Braydon Rekart, Jessica Cramer, Hannah Goett, & Drew Hans
+ * @author Ashley Holcomb
+ * @author Braydon Rekart
+ * @author Jessica Cramer
+ * @author Hannah Goett
+ * @author Drew Hans
  */
 public class Model {
 
@@ -19,12 +23,13 @@ public class Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////// convertBase2toBase* Methods /////////////////////////////////
+
     /**
      * convertBase2toBase8 Method
      *
-     * @param binString - assume a String of 1s and 0s with length bitPrecision or less
+     * @param binString    - assume a String of 1s and 0s with length bitPrecision or less
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed - a boolean that indicates two's compliment conversion
+     * @param signed       - a boolean that indicates two's compliment conversion
      * @return a string base8 representation of binString or an error message
      */
     public String convertBase2toBase8(String binString, int bitPrecision, boolean signed) {
@@ -51,8 +56,8 @@ public class Model {
             char[] bits = binString.toCharArray();
 
             // substitute every 3 bits with their octal value
-            for (int i = 0; i < bits.length; i++) {
-                temp = temp + bits[i]; // append next bit
+            for (char bit : bits) {
+                temp = temp + bit; // append next bit
 
                 if (temp.equalsIgnoreCase("111")) {
                     buffer = buffer + "7"; // append 7
@@ -78,8 +83,6 @@ public class Model {
                 } else if (temp.equalsIgnoreCase("000")) {
                     buffer = buffer + "0"; // append 0
                     temp = ""; // clear temp
-                } else {
-                    // do nothing
                 }
             }//end for loop
         }//end if else statement
@@ -90,14 +93,14 @@ public class Model {
     /**
      * convertBase2toBase10 Method
      *
-     * @param binString - assume a String of 1s and 0s with length bitPrecision or less
+     * @param binString    - assume a String of 1s and 0s with length bitPrecision or less
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed - a boolean that indicates two's compliment conversion
+     * @param signed       - a boolean that indicates two's compliment conversion
      * @return a string base10 representation of binString or an error message
      */
     public String convertBase2toBase10(String binString, int bitPrecision, boolean signed) {
-        String buffer = "";
-        int temp = 0;
+        String buffer;
+        int temp;
 
         // check that binString does not exceed our bitPrecision
         if (binString.length() > bitPrecision) {
@@ -130,9 +133,9 @@ public class Model {
     /**
      * convertBase2toBase16 Method
      *
-     * @param binString - assume a String of 1s and 0s with length bitPrecision or less
+     * @param binString    - assume a String of 1s and 0s with length bitPrecision or less
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed - a boolean that indicates two's compliment conversion
+     * @param signed       - a boolean that indicates two's compliment conversion
      * @return a string base16 representation of binString or an error message
      */
     public String convertBase2toBase16(String binString, int bitPrecision, boolean signed) {
@@ -159,8 +162,8 @@ public class Model {
             char[] bits = binString.toCharArray();
 
             // substitute every 3 bits with their octal value
-            for (int i = 0; i < bits.length; i++) {
-                temp = temp + bits[i]; // append next bit
+            for (char bit : bits) {
+                temp = temp + bit; // append next bit
 
                 if (temp.equalsIgnoreCase("1111")) {
                     buffer = buffer + "F"; // append F
@@ -210,8 +213,6 @@ public class Model {
                 } else if (temp.equalsIgnoreCase("0000")) {
                     buffer = buffer + "0"; // append 0
                     temp = ""; // clear temp
-                } else {
-                    // do nothing
                 }
             }//end for loop
         }//end if else statement
@@ -221,12 +222,13 @@ public class Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////// convertBase8toBase* Methods /////////////////////////////////
+
     /**
      * convertBase8toBase2 Method
      *
-     * @param octString - assume a String of octal values with bit length of bitPrecision or less
+     * @param octString    - assume a String of octal values with bit length of bitPrecision or less
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed - a boolean that indicates two's compliment conversion
+     * @param signed       - a boolean that indicates two's compliment conversion
      * @return a string base2 representation of octString or an error message
      */
     public String convertBase8toBase2(String octString, int bitPrecision, boolean signed) {
@@ -254,8 +256,6 @@ public class Model {
                 buffer = buffer + "1"; // append 1
             } else if (bits[0] == '0') {
                 buffer = buffer + "0"; // append 0
-            } else {
-                // do nothing
             }
 
             // substitute every octal value after index 0 with their 3 bit binary value
@@ -277,8 +277,6 @@ public class Model {
                     buffer = buffer + "001"; // append 001
                 } else if (bits[i] == '0') {
                     buffer = buffer + "000"; // append 000
-                } else {
-                    // do nothing
                 }
             }//end for loop
 
@@ -293,13 +291,13 @@ public class Model {
     /**
      * convertBase8toBase10 Method
      *
-     * @param octString - assume a String of octal values with bit length of bitPrecision or less
+     * @param octString    - assume a String of octal values with bit length of bitPrecision or less
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed - a boolean that indicates two's compliment conversion
+     * @param signed       - a boolean that indicates two's compliment conversion
      * @return a string base10 representation of octString or an error message
      */
     public String convertBase8toBase10(String octString, int bitPrecision, boolean signed) {
-        String buffer = "";
+        String buffer;
         String binString = convertBase8toBase2(octString, bitPrecision, signed);
 
         if (binString.equalsIgnoreCase(ERRMSG)) {
@@ -315,13 +313,13 @@ public class Model {
     /**
      * convertBase8toBase10 Method
      *
-     * @param octString - assume a String of octal values with bit length of bitPrecision or less
+     * @param octString    - assume a String of octal values with bit length of bitPrecision or less
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed - a boolean that indicates two's compliment conversion
+     * @param signed       - a boolean that indicates two's compliment conversion
      * @return a string base16 representation of octString or an error message
      */
     public String convertBase8toBase16(String octString, int bitPrecision, boolean signed) {
-        String buffer = "";
+        String buffer;
         String binString = convertBase8toBase2(octString, bitPrecision, signed);
 
         if (binString.equalsIgnoreCase(ERRMSG)) {
@@ -336,16 +334,17 @@ public class Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////// convertBase10toBase* Methods /////////////////////////////////
+
     /**
      * convertBase8toBase2 Method
      *
-     * @param decInteger - assume a standard 32-bit integer decimal number
+     * @param decInteger   - assume a standard 32-bit integer decimal number
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed - a boolean that indicates two's compliment conversion
+     * @param signed       - a boolean that indicates two's compliment conversion
      * @return a string base2 representation of decInteger or an error message
      */
     public String convertBase10toBase2(int decInteger, int bitPrecision, boolean signed) {
-        String buffer = "";
+        String buffer;
 
         if (isWithinBounds(decInteger, bitPrecision, signed)) {
             if (decInteger < 0) {
@@ -373,15 +372,27 @@ public class Model {
     }//end convertBase10toBase2 method
 
     /**
+     * convertBase10toBase2 Method
+     *
+     * @param decString    - assume a standard 32-bit integer decimal number in String form
+     * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
+     * @param signed       - a boolean that indicates two's compliment conversion
+     * @return a string base2 representation of decInteger or an error message
+     */
+    public String convertBase10toBase2(String decString, int bitPrecision, boolean signed) {
+        return convertBase10toBase2(Integer.parseInt(decString), bitPrecision, signed);
+    }//end convertBase10toBase2 method
+
+    /**
      * convertBase10toBase8 Method
      *
-     * @param decInteger - assume a standard 32-bit integer decimal number
+     * @param decInteger   - assume a standard 32-bit integer decimal number
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed - a boolean that indicates two's compliment conversion
+     * @param signed       - a boolean that indicates two's compliment conversion
      * @return a string base8 representation of decInteger or an error message
      */
     public String convertBase10toBase8(int decInteger, int bitPrecision, boolean signed) {
-        String buffer = "";
+        String buffer;
         String binString = convertBase10toBase2(decInteger, bitPrecision, signed);
 
         if (binString.equalsIgnoreCase(ERRMSG)) {
@@ -395,15 +406,27 @@ public class Model {
     }//end convertBase10toBase8 method
 
     /**
+     * convertBase10toBase8 Method
+     *
+     * @param decString    - assume a standard 32-bit integer decimal number in String form
+     * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
+     * @param signed       - a boolean that indicates two's compliment conversion
+     * @return a string base8 representation of decInteger or an error message
+     */
+    public String convertBase10toBase8(String decString, int bitPrecision, boolean signed) {
+        return convertBase10toBase8(Integer.parseInt(decString), bitPrecision, signed);
+    }//end convertBase10toBase8 method
+
+    /**
      * convertBase10toBase16 Method
      *
-     * @param decInteger - assume a standard 32-bit integer decimal number
+     * @param decInteger   - assume a standard 32-bit integer decimal number
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed - a boolean that indicates two's compliment conversion
+     * @param signed       - a boolean that indicates two's compliment conversion
      * @return a string base16 representation of decInteger or an error message
      */
     public String convertBase10toBase16(int decInteger, int bitPrecision, boolean signed) {
-        String buffer = "";
+        String buffer;
         String binString = convertBase10toBase2(decInteger, bitPrecision, signed);
 
         if (binString.equalsIgnoreCase(ERRMSG)) {
@@ -416,14 +439,28 @@ public class Model {
         return buffer;
     }//end convertBase10toBase16 method
 
+    /**
+     * convertBase10toBase16 Method
+     *
+     * @param decString    - assume a standard 32-bit integer decimal number in String form
+     * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
+     * @param signed       - a boolean that indicates two's compliment conversion
+     * @return a string base16 representation of decInteger or an error message
+     */
+    public String convertBase10toBase16(String decString, int bitPrecision, boolean signed) {
+        return convertBase10toBase16(Integer.parseInt(decString), bitPrecision, signed);
+    }//end convertBase10toBase16 method
+
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////// convertBase16toBase* Methods /////////////////////////////////
+
     /**
      * convertBase16toBase2 Method
      *
-     * @param hexString - assume a String of hexadecimal values with bit length of bitPrecision or less
+     * @param hexString    - assume a String of hexadecimal values with bit length of bitPrecision or less
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed - a boolean that indicates two's compliment conversion
+     * @param signed       - a boolean that indicates two's compliment conversion
      * @return a string base2 representation of hexString or an error message
      */
     public String convertBase16toBase2(String hexString, int bitPrecision, boolean signed) {
@@ -437,42 +474,40 @@ public class Model {
             char[] bits = hexString.toCharArray();
 
             // substitute every hexadecimal value with their 4 bit binary value
-            for (int i = 0; i < bits.length; i++) {
+            for (char bit : bits) {
 
-                if (bits[i] == 'F') {
+                if (bit == 'F') {
                     buffer = buffer + "1111"; // append 1111
-                } else if (bits[i] == 'E') {
+                } else if (bit == 'E') {
                     buffer = buffer + "1110"; // append 1110
-                } else if (bits[i] == 'D') {
+                } else if (bit == 'D') {
                     buffer = buffer + "1101"; // append 1101
-                } else if (bits[i] == 'C') {
+                } else if (bit == 'C') {
                     buffer = buffer + "1100"; // append 1100
-                } else if (bits[i] == 'B') {
+                } else if (bit == 'B') {
                     buffer = buffer + "1011"; // append 1011
-                } else if (bits[i] == 'A') {
+                } else if (bit == 'A') {
                     buffer = buffer + "1010"; // append 1010
-                } else if (bits[i] == '9') {
+                } else if (bit == '9') {
                     buffer = buffer + "1001"; // append 1001
-                } else if (bits[i] == '8') {
+                } else if (bit == '8') {
                     buffer = buffer + "1000"; // append 1000
-                } else if (bits[i] == '7') {
+                } else if (bit == '7') {
                     buffer = buffer + "0111"; // append 0111
-                } else if (bits[i] == '6') {
+                } else if (bit == '6') {
                     buffer = buffer + "0110"; // append 0110
-                } else if (bits[i] == '5') {
+                } else if (bit == '5') {
                     buffer = buffer + "0101"; // append 0101
-                } else if (bits[i] == '4') {
+                } else if (bit == '4') {
                     buffer = buffer + "0100"; // append 0100
-                } else if (bits[i] == '3') {
+                } else if (bit == '3') {
                     buffer = buffer + "0011"; // append 0011
-                } else if (bits[i] == '2') {
+                } else if (bit == '2') {
                     buffer = buffer + "0010"; // append 0010
-                } else if (bits[i] == '1') {
+                } else if (bit == '1') {
                     buffer = buffer + "0001"; // append 0001
-                } else if (bits[i] == '0') {
+                } else if (bit == '0') {
                     buffer = buffer + "0000"; // append 0000
-                } else {
-                    // do nothing
                 }
             }//end for loop
 
@@ -487,13 +522,13 @@ public class Model {
     /**
      * convertBase16toBase8 Method
      *
-     * @param hexString - assume a String of hexadecimal values with bit length of bitPrecision or less
+     * @param hexString    - assume a String of hexadecimal values with bit length of bitPrecision or less
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed - a boolean that indicates two's compliment conversion
+     * @param signed       - a boolean that indicates two's compliment conversion
      * @return a string base8 representation of hexString or an error message
      */
     public String convertBase16toBase8(String hexString, int bitPrecision, boolean signed) {
-        String buffer = "";
+        String buffer;
         String binString = convertBase16toBase2(hexString, bitPrecision, signed);
 
         if (binString.equalsIgnoreCase(ERRMSG)) {
@@ -509,13 +544,13 @@ public class Model {
     /**
      * convertBase16toBase8 Method
      *
-     * @param hexString - assume a String of hexadecimal values with bit length of bitPrecision or less
+     * @param hexString    - assume a String of hexadecimal values with bit length of bitPrecision or less
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed - a boolean that indicates two's compliment conversion
+     * @param signed       - a boolean that indicates two's compliment conversion
      * @return a string base8 representation of hexString or an error message
      */
     public String convertBase16toBase10(String hexString, int bitPrecision, boolean signed) {
-        String buffer = "";
+        String buffer;
         String binString = convertBase16toBase2(hexString, bitPrecision, signed);
 
         if (binString.equalsIgnoreCase(ERRMSG)) {
@@ -530,12 +565,13 @@ public class Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////// Operation Methods ///////////////////////////////////////
+
     /**
      * binaryAddition Method - https://stackoverflow.com/questions/8548586/adding-binary-numbers
      *
-     * @param s1
-     * @param s2
-     * @return
+     * @param s1 - a string of 1s and 0s
+     * @param s2 - a string of 1s and 0s
+     * @return the string result of s1 and s2
      */
     public String binaryAddition(String s1, String s2) {
         if (s1 == null || s2 == null) {
@@ -584,7 +620,7 @@ public class Model {
     //////////////////////////////////////// Helper Methods ////////////////////////////////////////
     private String positiveDecimalIntToUnsignedBinaryString(int decNum) {
         String buffer = "";
-        int remainder = 0;
+        int remainder;
 
         if (decNum == 0) {
             buffer = "0";
@@ -620,9 +656,9 @@ public class Model {
     /**
      * isWithinBounds Method
      *
-     * @param decNum - a normal base 10 integer number
-     * @param bitprecision - the number of binary bits we have to represent decNum
-     * @param signed - true if we want the binary representation to be signed
+     * @param decNum       - a normal base 10 integer number
+     * @param bitPrecision - the number of binary bits we have to represent decNum
+     * @param signed       - true if we want the binary representation to be signed
      * @return true if decNum is within upper and lower bounds
      */
     private boolean isWithinBounds(int decNum, int bitPrecision, boolean signed) {

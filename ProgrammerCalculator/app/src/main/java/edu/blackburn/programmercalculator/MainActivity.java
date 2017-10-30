@@ -9,17 +9,17 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Model calculatorModel;
-    int bitPrecision;
-    Boolean signed;
-    String inputMode;
-    String operationSelected;
-    int previousInput;
+    private Model calculatorModel;
+    private int bitPrecision;
+    private Boolean signed;
+    private String inputMode;
+    private String operationSelected;
+    private int previousInput;
 
-    TextView tvDEC; // the textview that displays decimal values
-    TextView tvHEX; // the textview that displays hexadecimal values
-    TextView tvOCT; // the textview that displays octal values
-    TextView tvBIN; // the textview that displays binary values
+    private TextView tvDEC; // the textview that displays decimal values
+    private TextView tvHEX; // the textview that displays hexadecimal values
+    private TextView tvOCT; // the textview that displays octal values
+    private TextView tvBIN; // the textview that displays binary values
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,67 +45,67 @@ public class MainActivity extends AppCompatActivity {
     }//end onCreate method
 
     public void onPress0(View view) {
-        appendButtonInput("0");
+        appendButtonInput(getString(R.string.zero));
     }//end onPress0 method
 
     public void onPress1(View view) {
-        appendButtonInput("1");
+        appendButtonInput(getString(R.string.one));
     }//end onPress1 method
 
     public void onPress2(View view) {
-        appendButtonInput("2");
+        appendButtonInput(getString(R.string.two));
     }//end onPress2 method
 
     public void onPress3(View view) {
-        appendButtonInput("3");
+        appendButtonInput(getString(R.string.three));
     }//end onPress3 method
 
     public void onPress4(View view) {
-        appendButtonInput("4");
+        appendButtonInput(getString(R.string.four));
     }//end onPress4 method
 
     public void onPress5(View view) {
-        appendButtonInput("5");
+        appendButtonInput(getString(R.string.five));
     }//end onPress5 method
 
     public void onPress6(View view) {
-        appendButtonInput("6");
+        appendButtonInput(getString(R.string.six));
     }//end onPress6 method
 
     public void onPress7(View view) {
-        appendButtonInput("7");
+        appendButtonInput(getString(R.string.seven));
     }//end onPress7 method
 
     public void onPress8(View view) {
-        appendButtonInput("8");
+        appendButtonInput(getString(R.string.eight));
     }//end onPress8 method
 
     public void onPress9(View view) {
-        appendButtonInput("9");
+        appendButtonInput(getString(R.string.nine));
     }//end onPress9 method
 
     public void onPressA(View view) {
-        appendButtonInput("A");
+        appendButtonInput(getString(R.string.a));
     }//end onPressA method
 
     public void onPressB(View view) {
-        appendButtonInput("B");
+        appendButtonInput(getString(R.string.b));
     }//end onPressB method
 
     public void onPressC(View view) {
-        appendButtonInput("C");
+        appendButtonInput(getString(R.string.c));
     }//end onPressC method
 
     public void onPressD(View view) {
-        appendButtonInput("D");
+        appendButtonInput(getString(R.string.d));
     }//end onPressD method
 
     public void onPressE(View view) {
-        appendButtonInput("E");
+        appendButtonInput(getString(R.string.e));
     }//end onPressE method
 
     public void onPressF(View view) {
-        appendButtonInput("F");
+        appendButtonInput(getString(R.string.f));
     }//end onPressF method
 
     private void appendButtonInput(String buttonValue) {
@@ -113,21 +113,26 @@ public class MainActivity extends AppCompatActivity {
         String legalOctInputs = "01234567";
         String legalDecInputs = "0123456789";
         String legalHexInputs = "0123456789ABCDEF";
+        String buffer;
 
-        if (inputMode == getString(R.string.BIN) && legalBinInputs.contains(buttonValue)) {
-            tvBIN.setText(tvBIN.getText().toString() + buttonValue);
+        if (inputMode.equalsIgnoreCase(getString(R.string.BIN)) && legalBinInputs.contains(buttonValue)) {
+            buffer = tvBIN.getText().toString() + buttonValue;
+            tvBIN.setText(buffer);
             updateTextViews(); // update TextViews only on legal button presses
 
-        } else if (inputMode == getString(R.string.OCT) && legalOctInputs.contains(buttonValue)) {
-            tvOCT.setText(tvBIN.getText().toString() + buttonValue);
+        } else if (inputMode.equalsIgnoreCase(getString(R.string.OCT)) && legalOctInputs.contains(buttonValue)) {
+            buffer = tvBIN.getText().toString() + buttonValue;
+            tvOCT.setText(buffer);
             updateTextViews(); // update TextViews only on legal button presses
 
-        } else if (inputMode == getString(R.string.DEC) && legalDecInputs.contains(buttonValue)) {
-            tvDEC.setText(tvDEC.getText().toString() + buttonValue);
+        } else if (inputMode.equalsIgnoreCase(getString(R.string.DEC)) && legalDecInputs.contains(buttonValue)) {
+            buffer = tvDEC.getText().toString() + buttonValue;
+            tvDEC.setText(buffer);
             updateTextViews(); // update TextViews only on legal button presses
 
-        } else if (inputMode == getString(R.string.HEX) && legalHexInputs.contains(buttonValue)) {
-            tvHEX.setText(tvHEX.getText().toString() + buttonValue);
+        } else if (inputMode.equalsIgnoreCase(getString(R.string.HEX)) && legalHexInputs.contains(buttonValue)) {
+            buffer = tvHEX.getText().toString() + buttonValue;
+            tvHEX.setText(buffer);
             updateTextViews(); // update TextViews only on legal button presses
 
         }
@@ -185,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
     }//end onPressNot method
 
     public void onPressMod(View view) {
-        operationSelected = getString(R.string.MOD);
+        operationSelected = getString(R.string.mod);
         previousInput = Integer.parseInt(tvDEC.getText().toString());
     }//end onPressMod method
 
@@ -223,29 +228,30 @@ public class MainActivity extends AppCompatActivity {
         String input2 = tvDEC.getText().toString();
         String result = "";
 
-        if (operationSelected == getString(R.string.NOT)) {
-            result = calculatorModel.not(input2);
-        } else if (operationSelected == getString(R.string.mod)) {
+        if (operationSelected.equalsIgnoreCase(getString(R.string.NOT))) {
+            result = calculatorModel.not(tvBIN.getText().toString());
+            result = calculatorModel.convertBase2toBase10(result, bitPrecision, signed);
+        } else if (operationSelected.equalsIgnoreCase(getString(R.string.mod))) {
             //result = calculatorModel.mod(input1, input2);
-        } else if (operationSelected == getString(R.string.AND)) {
+        } else if (operationSelected.equalsIgnoreCase(getString(R.string.AND))) {
             //result = calculatorModel.and(input1, input2);
-        } else if (operationSelected == getString(R.string.OR)) {
+        } else if (operationSelected.equalsIgnoreCase(getString(R.string.OR))) {
             //result = calculatorModel.or(input1, input2);
-        } else if (operationSelected == getString(R.string.XOR)) {
+        } else if (operationSelected.equalsIgnoreCase(getString(R.string.XOR))) {
             //result = calculatorModel.xor(input1, input2);
-        } else if (operationSelected == getString(R.string.NAND)) {
+        } else if (operationSelected.equalsIgnoreCase(getString(R.string.NAND))) {
             //result = calculatorModel.nand(input1, input2);
-        } else if (operationSelected == getString(R.string.NOR)) {
+        } else if (operationSelected.equalsIgnoreCase(getString(R.string.NOR))) {
             //result = calculatorModel.nor(input1, input2);
-        } else if (operationSelected == getString(R.string.XNOR)) {
+        } else if (operationSelected.equalsIgnoreCase(getString(R.string.XNOR))) {
             //result = calculatorModel.xnor(input1, input2);
-        } else if (operationSelected == getString(R.string.add)) {
+        } else if (operationSelected.equalsIgnoreCase(getString(R.string.add))) {
             //result = calculatorModel.add(input1, input2);
-        } else if (operationSelected == getString(R.string.sub)) {
+        } else if (operationSelected.equalsIgnoreCase(getString(R.string.sub))) {
             //result = calculatorModel.sub(input1, input2);
-        } else if (operationSelected == getString(R.string.mul)) {
+        } else if (operationSelected.equalsIgnoreCase(getString(R.string.mul))) {
             //result = calculatorModel.mul(input1, input2);
-        } else if (operationSelected == getString(R.string.div)) {
+        } else if (operationSelected.equalsIgnoreCase(getString(R.string.div))) {
             //result = calculatorModel.div(input1, input2);
         } else {
             // some unexpected operation was set
@@ -269,21 +275,21 @@ public class MainActivity extends AppCompatActivity {
     }//end onPressAC method
 
     public void onPressDel(View view) {
-        String buffer = "";
+        String buffer;
 
-        if (inputMode == getString(R.string.DEC)) {
+        if (inputMode.equalsIgnoreCase(getString(R.string.DEC))) {
             buffer = tvDEC.getText().toString();
             buffer = buffer.substring(0, buffer.length() - 1);
             tvDEC.setText(buffer);
-        } else if (inputMode == getString(R.string.BIN)) {
+        } else if (inputMode.equalsIgnoreCase(getString(R.string.BIN))) {
             buffer = tvBIN.getText().toString();
             buffer = buffer.substring(0, buffer.length() - 1);
             tvBIN.setText(buffer);
-        } else if (inputMode == getString(R.string.OCT)) {
+        } else if (inputMode.equalsIgnoreCase(getString(R.string.OCT))) {
             buffer = tvOCT.getText().toString();
             buffer = buffer.substring(0, buffer.length() - 1);
             tvOCT.setText(buffer);
-        } else if (inputMode == getString(R.string.HEX)) {
+        } else if (inputMode.equalsIgnoreCase(getString(R.string.HEX))) {
             buffer = tvHEX.getText().toString();
             buffer = buffer.substring(0, buffer.length() - 1);
             tvHEX.setText(buffer);
@@ -293,30 +299,30 @@ public class MainActivity extends AppCompatActivity {
     }//end onPressDel method
 
     public void updateTextViews() {
-        String buffer = "";
+        String buffer;
 
-        if (inputMode == getString(R.string.DEC)) {
+        if (inputMode.equalsIgnoreCase(getString(R.string.DEC))) {
             buffer = tvDEC.getText().toString();
 
             tvBIN.setText(calculatorModel.convertBase10toBase2(buffer, bitPrecision, signed));
             tvOCT.setText(calculatorModel.convertBase10toBase8(buffer, bitPrecision, signed));
             tvHEX.setText(calculatorModel.convertBase10toBase16(buffer, bitPrecision, signed));
 
-        } else if (inputMode == getString(R.string.BIN)) {
+        } else if (inputMode.equalsIgnoreCase(getString(R.string.BIN))) {
             buffer = tvBIN.getText().toString();
 
             tvOCT.setText(calculatorModel.convertBase2toBase8(buffer, bitPrecision, signed));
             tvDEC.setText(calculatorModel.convertBase2toBase10(buffer, bitPrecision, signed));
             tvHEX.setText(calculatorModel.convertBase2toBase16(buffer, bitPrecision, signed));
 
-        } else if (inputMode == getString(R.string.OCT)) {
+        } else if (inputMode.equalsIgnoreCase(getString(R.string.OCT))) {
             buffer = tvOCT.getText().toString();
 
             tvBIN.setText(calculatorModel.convertBase8toBase2(buffer, bitPrecision, signed));
             tvDEC.setText(calculatorModel.convertBase8toBase10(buffer, bitPrecision, signed));
             tvHEX.setText(calculatorModel.convertBase8toBase16(buffer, bitPrecision, signed));
 
-        } else if (inputMode == getString(R.string.HEX)) {
+        } else if (inputMode.equalsIgnoreCase(getString(R.string.HEX))) {
             buffer = tvHEX.getText().toString();
 
             tvBIN.setText(calculatorModel.convertBase16toBase2(buffer, bitPrecision, signed));
