@@ -728,6 +728,197 @@ public class Model {
         return (decNum <= upperBound) && (decNum >= lowerBound);
     }//end isWithinBounds method
 
+    /**
+     * Takes in two decimal numbers as Strings and returns the sum as a String
+     *
+     * @param dec1 - first addend
+     * @param dec2 - second addend
+     * @return sum
+     */
+    public String add(String dec1, String dec2){
+        int num1 = Integer.parseInt(dec1);
+        int num2 = Integer.parseInt(dec2);
+
+        return "" + (num1 + num2);
+    }
+
+    /**
+     * Takes in two decimal numbers as Strings and returns the difference as a String
+     *
+     * @param dec1 - minuend
+     * @param dec2 - subtrahend
+     * @return difference
+     */
+    public String subtract(String dec1, String dec2){
+        int num1 = Integer.parseInt(dec1);
+        int num2 = Integer.parseInt(dec2);
+
+        return "" + (num1 - num2);
+    }
+
+    /**
+     * Takes in two decimal numbers as Strings and returns the product as a String
+     * @param dec1 - first factor
+     * @param dec2 - second factor
+     * @return product
+     */
+    public String multiply(String dec1, String dec2){
+        int num1 = Integer.parseInt(dec1);
+        int num2 = Integer.parseInt(dec2);
+
+        return "" + (num1 * num2);
+    }
+
+    /**
+     * Takes in two decimal numbers as Strings and returns the truncated quotient as a String
+     *
+     * @param dec1 - dividend
+     * @param dec2 - divisor
+     * @return quotient
+     */
+    public String divide(String dec1, String dec2){
+        int num1 = Integer.parseInt(dec1);
+        int num2 = Integer.parseInt(dec2);
+
+        return "" + (num1 / num2);
+    }
+
+    /**
+     * Takes in two decimal numbers as Strings and returns the remainder as a String
+     *
+     * @param dec1 - dividend
+     * @param dec2 - divisor
+     * @return quotient
+     */
+    public String mod(String dec1, String dec2){
+        int num1 = Integer.parseInt(dec1);
+        int num2 = Integer.parseInt(dec2);
+
+        return "" + (num1 % num2);
+    }
+
+    /**
+     * Takes in two binary numbers as Strings and returns the bitwise AND of input1 and input2 as a
+     * String
+     *
+     * @param input1 - first binary number
+     * @param input2 - second binary number
+     * @return bitwise AND of input1 and input2 as a String
+     */
+    public String and(String input1, String input2){
+        String largest = input2;
+        String smallest = input1;
+        if(input2.length()<shortest){
+            largest = input1;
+            smallest = input2;
+        }
+        smallest = String.format("%" + largest.length() + "s", smallest).replace(" ", "0");
+
+        String buffer = "";
+        for (int i = 0; i < smallest.length(); i++) {
+            if(largest.charAt(i)=='1' && smallest.charAt(i)=='1' ){
+                buffer = buffer + "1";
+            } else {
+                buffer = buffer + "0";
+            }
+        }
+        return buffer;
+    }
+
+    /**
+     * Takes in two binary numbers as Strings and returns the bitwise OR of input1 and input2 as a
+     * String
+     *
+     * @param input1 - first binary number
+     * @param input2 - second binary number
+     * @return bitwise OR of input1 and input2 as a String
+     */
+    public String or(String input1, String input2){
+        String largest = input2;
+        String smallest = input1;
+        if(input2.length()<smallest.length()){
+            largest = input1;
+            smallest = input2;
+        }
+        smallest = String.format("%" + largest.length() + "s", smallest).replace(" ", "0");
+
+        String buffer = "";
+        for (int i = 0; i < smallest.length(); i++) {
+            if(largest.charAt(i)=='1' || smallest.charAt(i)=='1' ){
+                buffer = buffer + "1";
+            } else {
+                buffer = buffer + "0";
+            }
+        }
+        return buffer;
+    }
+
+    /**
+     * Takes in two binary numbers as Strings and returns the bitwise XOR of input1 and input2 as a
+     * String
+     *
+     * @param input1 - first binary number
+     * @param input2 - second binary number
+     * @return bitwise XOR of input1 and input2 as a String
+     */
+    public String xor(String input1, String input2){
+        String largest = input2;
+        String smallest = input1;
+        if(input2.length()<smallest.length()){
+            largest = input1;
+            smallest = input2;
+        }
+        smallest = String.format("%" + largest.length() + "s", smallest).replace(" ", "0");
+
+        String buffer = "";
+        for (int i = 0; i < smallest.length(); i++) {
+            if(largest.charAt(i)=='1' ^ smallest.charAt(i)=='1' ){
+                buffer = buffer + "1";
+            } else {
+                buffer = buffer + "0";
+            }
+        }
+        return buffer;
+    }
+
+    /**
+     * Takes in two binary numbers as Strings and returns the bitwise NAND of input1 and input2 as a
+     * String
+     *
+     * @param input1 - first binary number
+     * @param input2 - second binary number
+     * @return bitwise NAND of input1 and input2 as a String
+     */
+    public String nand(String input1, String input2){
+        return this.not(this.and(input1, input2));
+    }
+
+    /**
+     * Takes in two binary numbers as Strings and returns the bitwise NOR of input1 and input2 as a
+     * String
+     *
+     * @param input1 - first binary number
+     * @param input2 - second binary number
+     * @return bitwise NOR of input1 and input2 as a String
+     */
+    public String nor(String input1, String input2){
+        return this.not(this.or(input1, input2));
+    }
+
+    /**
+     * Takes in two binary numbers as Strings and returns the bitwise XNOR of input1 and input2 as a
+     * String
+     *
+     * @param input1 - first binary number
+     * @param input2 - second binary number
+     * @return bitwise XNOR of input1 and input2 as a String
+     */
+    public String xnor(String input1, String input2){
+        return this.not(this.xor(input1, input2));
+    }
+
+
+
     /*
     // This block of commented out code is left over from Monday October 23rd's session
 
