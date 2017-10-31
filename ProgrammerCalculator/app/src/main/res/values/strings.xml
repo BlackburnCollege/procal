@@ -19,7 +19,7 @@
     <string name="XOR">XOR</string>
     <string name="NAND">NAND</string>
     <string name="NOR">NOR</string>
-    <string name="XNOR">NXOR</string>
+    <string name="XNOR">XNOR</string>
     <string name="NOT">NOT</string>
     <string name="zero">0</string>
     <string name="one">1</string>
