@@ -137,6 +137,10 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    public String truncZero(String string) {
+        return string.replaceFirst("^0+(?!$)", "");
+    }
+
     public void onPress0(View view) {
         appendButtonInput(getString(R.string.zero));
     }//end onPress0 method
@@ -251,72 +255,85 @@ public class MainActivity extends AppCompatActivity
         operationSelected = getString(R.string.AND);
         previousDecInput = Integer.parseInt(tvDEC.getText().toString());
         previousBinInput = tvBIN.getText().toString();
+        clearTextViews();
     }//end onPressAnd method
 
     public void onPressNand(View view) {
         operationSelected = getString(R.string.NAND);
         previousDecInput = Integer.parseInt(tvDEC.getText().toString());
         previousBinInput = tvBIN.getText().toString();
+        clearTextViews();
     }//end onPressNand method
 
     public void onPressOr(View view) {
         operationSelected = getString(R.string.OR);
         previousDecInput = Integer.parseInt(tvDEC.getText().toString());
         previousBinInput = tvBIN.getText().toString();
+        clearTextViews();
     }//end onPressOr method
 
     public void onPressNor(View view) {
         operationSelected = getString(R.string.NOR);
         previousDecInput = Integer.parseInt(tvDEC.getText().toString());
         previousBinInput = tvBIN.getText().toString();
+        clearTextViews();
     }//end onPressNor method
 
     public void onPressXor(View view) {
         operationSelected = getString(R.string.XOR);
         previousDecInput = Integer.parseInt(tvDEC.getText().toString());
         previousBinInput = tvBIN.getText().toString();
+        clearTextViews();
     }//end onPressXor method
 
     public void onPressXnor(View view) {
         operationSelected = getString(R.string.XNOR);
         previousDecInput = Integer.parseInt(tvDEC.getText().toString());
         previousBinInput = tvBIN.getText().toString();
+        clearTextViews();
     }//end onPressXnor method
 
     public void onPressNot(View view) {
         operationSelected = getString(R.string.NOT);
         previousDecInput = Integer.parseInt(tvDEC.getText().toString());
         previousBinInput = tvBIN.getText().toString();
+        clearTextViews();
+        onPressEqual(view);
     }//end onPressNot method
 
     public void onPressMod(View view) {
         operationSelected = getString(R.string.mod);
         previousDecInput = Integer.parseInt(tvDEC.getText().toString());
         previousBinInput = tvBIN.getText().toString();
+        clearTextViews();
     }//end onPressMod method
 
     public void onPressDivide(View view) {
         operationSelected = getString(R.string.div);
         previousDecInput = Integer.parseInt(tvDEC.getText().toString());
         previousBinInput = tvBIN.getText().toString();
+        clearTextViews();
     }//end onPressDivide method
 
     public void onPressMultiply(View view) {
         operationSelected = getString(R.string.mul);
         previousDecInput = Integer.parseInt(tvDEC.getText().toString());
         previousBinInput = tvBIN.getText().toString();
+        clearTextViews();
     }//end onPressMultiply method
 
     public void onPressAdd(View view) {
         operationSelected = getString(R.string.add);
         previousDecInput = Integer.parseInt(tvDEC.getText().toString());
         previousBinInput = tvBIN.getText().toString();
+        clearTextViews();
     }//end onPressAdd method method
 
     public void onPressSubtract(View view) {
         operationSelected = getString(R.string.sub);
         previousDecInput = Integer.parseInt(tvDEC.getText().toString());
         previousBinInput = tvBIN.getText().toString();
+        clearTextViews();
     }//end onPressSubtract method
 
     public void onPressEqual(View view) {
@@ -331,70 +348,113 @@ public class MainActivity extends AppCompatActivity
 
         String input1;
         String input2;
-        String result = "";
+        String binResult = "";
+        String decResult = "";
+
+        previousBinInput = String.format("%" + bitPrecision + "s", previousBinInput).replace(' ', '0');
 
         if (operationSelected.equalsIgnoreCase(getString(R.string.NOT))) {
-            result = calculatorModel.not(previousBinInput);
-            result = calculatorModel.convertBase2toBase10(result, bitPrecision, signed);
-        } else if (operationSelected.equalsIgnoreCase(getString(R.string.mod))) {
-            input1 = String.valueOf(previousDecInput);
-            input2 = tvDEC.getText().toString();
-            result = calculatorModel.mod(input1, input2);
+            binResult = calculatorModel.not(previousBinInput);
+            decResult = calculatorModel.convertBase2toBase10(binResult, bitPrecision, signed);
+
         } else if (operationSelected.equalsIgnoreCase(getString(R.string.AND))) {
             input1 = previousBinInput;
             input2 = tvBIN.getText().toString();
-            result = calculatorModel.and(input1, input2);
+            input2 = String.format("%" + bitPrecision + "s", input2).replace(' ', '0');
+            binResult = calculatorModel.and(input1, input2);
+            decResult = calculatorModel.convertBase2toBase10(binResult, bitPrecision, signed);
+
         } else if (operationSelected.equalsIgnoreCase(getString(R.string.OR))) {
             input1 = previousBinInput;
             input2 = tvBIN.getText().toString();
-            result = calculatorModel.or(input1, input2);
+            input2 = String.format("%" + bitPrecision + "s", input2).replace(' ', '0');
+            binResult = calculatorModel.or(input1, input2);
+            decResult = calculatorModel.convertBase2toBase10(binResult, bitPrecision, signed);
+
+
         } else if (operationSelected.equalsIgnoreCase(getString(R.string.XOR))) {
             input1 = previousBinInput;
             input2 = tvBIN.getText().toString();
-            result = calculatorModel.xor(input1, input2);
+            input2 = String.format("%" + bitPrecision + "s", input2).replace(' ', '0');
+            binResult = calculatorModel.xor(input1, input2);
+            decResult = calculatorModel.convertBase2toBase10(binResult, bitPrecision, signed);
+
+
         } else if (operationSelected.equalsIgnoreCase(getString(R.string.NAND))) {
             input1 = previousBinInput;
             input2 = tvBIN.getText().toString();
-            result = calculatorModel.nand(input1, input2);
+            input2 = String.format("%" + bitPrecision + "s", input2).replace(' ', '0');
+            binResult = calculatorModel.nand(input1, input2);
+            decResult = calculatorModel.convertBase2toBase10(binResult, bitPrecision, signed);
+
+
         } else if (operationSelected.equalsIgnoreCase(getString(R.string.NOR))) {
             input1 = previousBinInput;
             input2 = tvBIN.getText().toString();
-            result = calculatorModel.nor(input1, input2);
+            input2 = String.format("%" + bitPrecision + "s", input2).replace(' ', '0');
+            binResult = calculatorModel.nor(input1, input2);
+            decResult = calculatorModel.convertBase2toBase10(binResult, bitPrecision, signed);
+
         } else if (operationSelected.equalsIgnoreCase(getString(R.string.XNOR))) {
             input1 = previousBinInput;
             input2 = tvBIN.getText().toString();
-            result = calculatorModel.xnor(input1, input2);
+            input2 = String.format("%" + bitPrecision + "s", input2).replace(' ', '0');
+            binResult = calculatorModel.xnor(input1, input2);
+            decResult = calculatorModel.convertBase2toBase10(binResult, bitPrecision, signed);
+
         } else if (operationSelected.equalsIgnoreCase(getString(R.string.add))) {
             input1 = String.valueOf(previousDecInput);
             input2 = tvDEC.getText().toString();
-            result = calculatorModel.add(input1, input2);
+            decResult = calculatorModel.add(input1, input2);
+            binResult = calculatorModel.convertBase10toBase2(decResult, bitPrecision, signed);
+
         } else if (operationSelected.equalsIgnoreCase(getString(R.string.sub))) {
             input1 = String.valueOf(previousDecInput);
             input2 = tvDEC.getText().toString();
-            result = calculatorModel.sub(input1, input2);
+            decResult = calculatorModel.sub(input1, input2);
+            binResult = calculatorModel.convertBase10toBase2(decResult, bitPrecision, signed);
+
         } else if (operationSelected.equalsIgnoreCase(getString(R.string.mul))) {
             input1 = String.valueOf(previousDecInput);
             input2 = tvDEC.getText().toString();
-            result = calculatorModel.mul(input1, input2);
+            decResult = calculatorModel.mul(input1, input2);
+            binResult = calculatorModel.convertBase10toBase2(decResult, bitPrecision, signed);
+
         } else if (operationSelected.equalsIgnoreCase(getString(R.string.div))) {
             input1 = String.valueOf(previousDecInput);
             input2 = tvDEC.getText().toString();
-            result = calculatorModel.div(input1, input2);
+            decResult = calculatorModel.div(input1, input2);
+            binResult = calculatorModel.convertBase10toBase2(decResult, bitPrecision, signed);
+
+        } else if (operationSelected.equalsIgnoreCase(getString(R.string.mod))) {
+            input1 = String.valueOf(previousDecInput);
+            input2 = tvDEC.getText().toString();
+            decResult = calculatorModel.mod(input1, input2);
+            binResult = calculatorModel.convertBase10toBase2(decResult, bitPrecision, signed);
+
         } else {
             // some unexpected operation was set
-            result = "";
+            binResult = "";
+            decResult = "";
         }
 
+        clearTextViews(); // before updating
+
         String previousMode = inputMode; // store current inputMode
-        inputMode = getString(R.string.DEC); // set to DEC temporarily
-        tvDEC.setText(result); // update tvDEC with result
+        inputMode = getString(R.string.BIN);
+        tvBIN.setText(truncZero(binResult));
         updateTextViews(); // update all other TextViews
         inputMode = previousMode; // return to the original inputMode
+
     }//end onPressEqual method
 
     public void onPressAc(View view) {
         operationSelected = getString(R.string.NOT);
         previousDecInput = 0;
+        clearTextViews();
+    }//end onPressAC method
+
+    public void clearTextViews() {
         tvBIN.setText("");
         tvOCT.setText("");
         tvDEC.setText("");
@@ -431,30 +491,30 @@ public class MainActivity extends AppCompatActivity
         if (inputMode.equalsIgnoreCase(getString(R.string.DEC))) {
             buffer = tvDEC.getText().toString();
 
-            tvBIN.setText(calculatorModel.convertBase10toBase2(buffer, bitPrecision, signed));
-            tvOCT.setText(calculatorModel.convertBase10toBase8(buffer, bitPrecision, signed));
-            tvHEX.setText(calculatorModel.convertBase10toBase16(buffer, bitPrecision, signed));
+            tvBIN.setText(truncZero(calculatorModel.convertBase10toBase2(buffer, bitPrecision, signed)));
+            tvOCT.setText(truncZero(calculatorModel.convertBase10toBase8(buffer, bitPrecision, signed)));
+            tvHEX.setText(truncZero(calculatorModel.convertBase10toBase16(buffer, bitPrecision, signed)));
 
         } else if (inputMode.equalsIgnoreCase(getString(R.string.BIN))) {
             buffer = tvBIN.getText().toString();
 
-            tvOCT.setText(calculatorModel.convertBase2toBase8(buffer, bitPrecision, signed));
-            tvDEC.setText(calculatorModel.convertBase2toBase10(buffer, bitPrecision, signed));
-            tvHEX.setText(calculatorModel.convertBase2toBase16(buffer, bitPrecision, signed));
+            tvOCT.setText(truncZero(calculatorModel.convertBase2toBase8(buffer, bitPrecision, signed)));
+            tvDEC.setText(truncZero(calculatorModel.convertBase2toBase10(buffer, bitPrecision, signed)));
+            tvHEX.setText(truncZero(calculatorModel.convertBase2toBase16(buffer, bitPrecision, signed)));
 
         } else if (inputMode.equalsIgnoreCase(getString(R.string.OCT))) {
             buffer = tvOCT.getText().toString();
 
-            tvBIN.setText(calculatorModel.convertBase8toBase2(buffer, bitPrecision, signed));
-            tvDEC.setText(calculatorModel.convertBase8toBase10(buffer, bitPrecision, signed));
-            tvHEX.setText(calculatorModel.convertBase8toBase16(buffer, bitPrecision, signed));
+            tvBIN.setText(truncZero(calculatorModel.convertBase8toBase2(buffer, bitPrecision, signed)));
+            tvDEC.setText(truncZero(calculatorModel.convertBase8toBase10(buffer, bitPrecision, signed)));
+            tvHEX.setText(truncZero(calculatorModel.convertBase8toBase16(buffer, bitPrecision, signed)));
 
         } else if (inputMode.equalsIgnoreCase(getString(R.string.HEX))) {
             buffer = tvHEX.getText().toString();
 
-            tvBIN.setText(calculatorModel.convertBase16toBase2(buffer, bitPrecision, signed));
-            tvOCT.setText(calculatorModel.convertBase16toBase8(buffer, bitPrecision, signed));
-            tvDEC.setText(calculatorModel.convertBase16toBase10(buffer, bitPrecision, signed));
+            tvBIN.setText(truncZero(calculatorModel.convertBase16toBase2(buffer, bitPrecision, signed)));
+            tvOCT.setText(truncZero(calculatorModel.convertBase16toBase8(buffer, bitPrecision, signed)));
+            tvDEC.setText(truncZero(calculatorModel.convertBase16toBase10(buffer, bitPrecision, signed)));
         }
     }//end updateTextViews method
 
