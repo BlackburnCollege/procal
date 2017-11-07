@@ -2,6 +2,7 @@ package edu.blackburn.programmercalculator;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.RelativeLayout;
@@ -50,6 +53,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         // leave everything above this line alone in onCreate method
+
+        resizeGUI();
 
         // initialize our TextView GUI objects
         tvDEC = (TextView) findViewById((R.id.textViewDEC));
@@ -137,6 +142,19 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void resizeGUI() {
+        // manually resize the outter LinearLayout
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int heightPxs = metrics.heightPixels;
+        int widthPxs = metrics.widthPixels;
+
+        LinearLayout linearLayoutContainer = (LinearLayout) findViewById(R.id.linearLayoutContainer);
+        LayoutParams linearLayoutParams = linearLayoutContainer.getLayoutParams();
+        linearLayoutParams.width = widthPxs;
+        linearLayoutParams.height = heightPxs;
     }
 
     public String truncZero(String string) {
