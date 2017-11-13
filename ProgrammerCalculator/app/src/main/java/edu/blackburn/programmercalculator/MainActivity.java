@@ -68,11 +68,12 @@ public class MainActivity extends AppCompatActivity
         // set default values for our global Controller variables
         inputMode = getString(R.string.DEC);
         signed = true;
-        bitPrecision = 64;
-        operationSelected = getString(R.string.NOT);
+        bitPrecision = 32;
+        operationSelected = null;
         previousDecInput = 0;
         previousBinInput = "";
 
+        updateAppTitle(getString(R.string.signed32bit));
     }//end onCreate method
 
     @Override
@@ -113,30 +114,36 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.mode_8bitsigned) {
+        if (id == R.id.mode_4bitunsigned) {
+            // update global Controller variables
+            signed = false;
+            bitPrecision = 4;
+            setTitle(getString(R.string.unsigned4bit));
+        } else if (id == R.id.mode_8bitsigned) {
             // update global Controller variables
             signed = true;
             bitPrecision = 8;
+            setTitle(getString(R.string.signed8bit));
         } else if (id == R.id.mode_8bitunsigned) {
             // update global Controller variables
             signed = false;
             bitPrecision = 8;
+            setTitle(getString(R.string.unsigned8bit));
         } else if (id == R.id.mode_16bitsigned) {
             // update global Controller variables
             signed = true;
             bitPrecision = 16;
+            setTitle(getString(R.string.signed16bit));
         } else if (id == R.id.mode_16bitunsigned) {
             // update global Controller variables
             signed = false;
             bitPrecision = 16;
+            setTitle(getString(R.string.unsigned16bit));
         } else if (id == R.id.mode_32bitsigned) {
             // update global Controller variables
             signed = true;
             bitPrecision = 32;
-        } else if (id == R.id.mode_32bitunsigned) {
-            // update global Controller variables
-            signed = true;
-            bitPrecision = 32;
+            setTitle(getString(R.string.signed32bit));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -155,6 +162,10 @@ public class MainActivity extends AppCompatActivity
         LayoutParams linearLayoutParams = linearLayoutContainer.getLayoutParams();
         linearLayoutParams.width = widthPxs;
         linearLayoutParams.height = heightPxs;
+    }
+
+    private void updateAppTitle(String s) {
+        setTitle(s);
     }
 
     public String truncZero(String string) {

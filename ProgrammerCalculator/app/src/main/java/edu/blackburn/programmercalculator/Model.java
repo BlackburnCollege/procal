@@ -1,5 +1,7 @@
 package edu.blackburn.programmercalculator;
 
+import java.math.BigInteger;
+
 /**
  * [Super] Model(s) Class
  *
@@ -615,6 +617,80 @@ public class Model {
     }//end convertBase16toBase10
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////// Helper Methods ////////////////////////////////////////
+
+    private String bigIntegerToBigIntegerString(BigInteger bigInt) {
+        return bigInt.toString();
+    }//end bigIntegerToBigIntegerString method
+
+    private BigInteger bigIntegerStringToBigInteger(String bigInt) {
+        return new BigInteger(bigInt);
+    }//end bigIntegerStringToBigInteger method
+
+    private String positiveDecimalIntToUnsignedBinaryString(int decNum) {
+        String buffer = "";
+        int remainder;
+
+        if (decNum == 0) {
+            buffer = "0";
+        } else {
+            while (decNum > 0) {
+                remainder = decNum % 2;
+                buffer = remainder + buffer;
+                decNum = decNum / 2;
+            }//end while loop
+        }
+
+        return buffer;
+    }//end positiveDecimalIntToUnsignedBinaryString method
+
+    /**
+     * unsignedBinaryStringToPositiveDecimalInt Method
+     *
+     * @param binString - assume a String of 1s and 0s
+     * @return true if decNum is within upper and lower bounds
+     */
+    private int unsignedBinaryStringToPositiveDecimalInt(String binString) {
+        int temp = 0;
+        char[] bits = binString.toCharArray();
+
+        for (int i = 0; i < bits.length; i++) {
+            if (bits[i] == '1') {
+                temp = temp + (int) (Math.pow(2, bits.length - i - 1));
+            }
+        }
+        return temp;
+    }//end unsignedBinaryStringToPositiveDecimalInt method
+
+    /**
+     * isWithinBounds Method
+     *
+     * @param decNum       - a normal base 10 integer number
+     * @param bitPrecision - the number of binary bits we have to represent decNum
+     * @param signed       - true if we want the binary representation to be signed
+     * @return true if decNum is within upper and lower bounds
+     */
+    public boolean isWithinBounds(long decNum, int bitPrecision, boolean signed) {
+        //store upper and lower bounds as 64 bit numbers to avoid overflow
+        long upperBound;
+        long lowerBound;
+
+        if (signed) {
+            upperBound = (long) (Math.pow(2, bitPrecision - 1) - 1);
+            lowerBound = (long) (Math.pow(2, bitPrecision - 1) * -1);
+        } else {
+            upperBound = (long) (Math.pow(2, bitPrecision) - 1);
+            lowerBound = 0;
+        }
+
+        return (decNum <= upperBound) && (decNum >= lowerBound);
+    }//end isWithinBounds method
+
+    public boolean isBinWithinBounds(String binNum, int bitPrecision) {
+        return binNum.length() <= bitPrecision;
+    }//end isWithinBounds method
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////// Operation Methods ///////////////////////////////////////
 
     /**
@@ -666,67 +742,6 @@ public class Model {
         binNum = binNum.replace("x", "1"); // set xs to 1s
         return binNum;
     }//end not method
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////// Helper Methods ////////////////////////////////////////
-    private String positiveDecimalIntToUnsignedBinaryString(int decNum) {
-        String buffer = "";
-        int remainder;
-
-        if (decNum == 0) {
-            buffer = "0";
-        } else {
-            while (decNum > 0) {
-                remainder = decNum % 2;
-                buffer = remainder + buffer;
-                decNum = decNum / 2;
-            }//end while loop
-        }
-
-        return buffer;
-    }//end positiveDecimalIntToUnsignedBinaryString method
-
-    /**
-     * unsignedBinaryStringToPositiveDecimalInt Method
-     *
-     * @param binString - assume a String of 1s and 0s
-     * @return true if decNum is within upper and lower bounds
-     */
-    private int unsignedBinaryStringToPositiveDecimalInt(String binString) {
-        int temp = 0;
-        char[] bits = binString.toCharArray();
-
-        for (int i = 0; i < bits.length; i++) {
-            if (bits[i] == '1') {
-                temp = temp + (int) (Math.pow(2, bits.length - i - 1));
-            }
-        }
-        return temp;
-    }//end unsignedBinaryStringToPositiveDecimalInt method
-
-    /**
-     * isWithinBounds Method
-     *
-     * @param decNum       - a normal base 10 integer number
-     * @param bitPrecision - the number of binary bits we have to represent decNum
-     * @param signed       - true if we want the binary representation to be signed
-     * @return true if decNum is within upper and lower bounds
-     */
-    private boolean isWithinBounds(int decNum, int bitPrecision, boolean signed) {
-        //store upper and lower bounds as 64 bit numbers to avoid overflow
-        long upperBound;
-        long lowerBound;
-
-        if (signed) {
-            upperBound = (long) (Math.pow(2, bitPrecision - 1) - 1);
-            lowerBound = (long) (Math.pow(2, bitPrecision - 1) * -1);
-        } else {
-            upperBound = (long) (Math.pow(2, bitPrecision) - 1);
-            lowerBound = 0;
-        }
-
-        return (decNum <= upperBound) && (decNum >= lowerBound);
-    }//end isWithinBounds method
 
     /**
      * Takes in two decimal numbers as Strings and returns the sum as a String
@@ -918,60 +933,4 @@ public class Model {
         return this.not(this.xor(input1, input2));
     }
 
-
-
-    /*
-    // This block of commented out code is left over from Monday October 23rd's session
-
-    private String calculateConversion(int dec, int bits, int base, boolean signed) {
-        JavaApplication2 myProgram = new JavaApplication2();
-        double convertTemp;
-        StringBuilder buffer = new StringBuilder();
-        String stuffing = "";
-        double tempPower; //because NetBeans is afraid of lossy conversions
-        if (signed) {
-            convertTemp = Math.abs(dec);
-            if (dec >= 0) {
-                stuffing = "0";
-            } else {
-                stuffing = "1";
-            }
-        } else {
-            convertTemp = dec;
-        }
-        for (int i = bits - 1; i > -1; i--) {
-            tempPower = Math.pow(base, i);
-            if (convertTemp < tempPower) {
-                buffer.append("0");
-            } else {
-                buffer.append("1");
-                convertTemp = convertTemp - tempPower;
-            }
-            System.out.println(buffer);
-        }
-        //If we don't have enough bits...
-        if (convertTemp > 0) {
-            return "NOPE";
-        }
-        if (signed) {
-            buffer.replace(0, buffer.length() - 1, myProgram.binaryAddition(myProgram.not(String.valueOf(buffer)), "1"));
-            //Gotta stuff it, already have appropriate "stuffing", now for bitPrec
-            System.out.println(buffer);
-            while (buffer.length() <= bits) {
-                buffer.append(stuffing);
-            }
-        }
-        return String.valueOf(buffer);
-    }
-    private String convertDecimalToBinary(int dec, int bitPrec, boolean signed) {
-        JavaApplication2 myProgram = new JavaApplication2();
-        String converted = myProgram.calculateConversion(dec, bitPrec, 2, signed);
-        if (converted.length() > bitPrec) {
-            return "NOPE";
-        } else {
-            return converted;
-        }
-    }
-
-     */
 }//end Model class

@@ -38,5 +38,12 @@
     <string name="e">E</string>
     <string name="f">F</string>
     <string name="DEL">DEL</string>
+
+    <string name="signed32bit">32-bit Signed</string>
+    <string name="signed16bit">16-bit Signed</string>
+    <string name="unsigned16bit">16-bit Unsigned</string>
+    <string name="signed8bit">8-bit Signed</string>
+    <string name="unsigned8bit">8-bit Unsigned</string>
+    <string name="unsigned4bit">4-bit Unsigned</string>
 </resources>
 

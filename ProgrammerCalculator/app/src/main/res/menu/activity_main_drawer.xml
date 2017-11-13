@@ -3,9 +3,6 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/mode_32bitunsigned"
-            android:title="32-bit Unsigned" />
-        <item
             android:id="@+id/mode_32bitsigned"
             android:title="32-bit Signed" />
         <item
@@ -20,6 +17,9 @@
         <item
             android:id="@+id/mode_8bitsigned"
             android:title="8-bit Signed" />
+        <item
+            android:id="@+id/mode_4bitunsigned"
+            android:title="4-bit Unsigned" />
 
     </group>
 </menu>
