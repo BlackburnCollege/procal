@@ -284,88 +284,70 @@ public class MainActivity extends AppCompatActivity
 
     public void onPressAnd(View view) {
         operationSelected = getString(R.string.AND);
-        previousDecInput = Integer.parseInt(tvDEC.getText().toString());
-        previousBinInput = tvBIN.getText().toString();
-        clearTextViews();
+        setPreviousInput(view);
     }//end onPressAnd method
 
     public void onPressNand(View view) {
         operationSelected = getString(R.string.NAND);
-        previousDecInput = Integer.parseInt(tvDEC.getText().toString());
-        previousBinInput = tvBIN.getText().toString();
-        clearTextViews();
+        setPreviousInput(view);
     }//end onPressNand method
 
     public void onPressOr(View view) {
         operationSelected = getString(R.string.OR);
-        previousDecInput = Integer.parseInt(tvDEC.getText().toString());
-        previousBinInput = tvBIN.getText().toString();
-        clearTextViews();
+        setPreviousInput(view);
     }//end onPressOr method
 
     public void onPressNor(View view) {
         operationSelected = getString(R.string.NOR);
-        previousDecInput = Integer.parseInt(tvDEC.getText().toString());
-        previousBinInput = tvBIN.getText().toString();
-        clearTextViews();
+        setPreviousInput(view);
     }//end onPressNor method
 
     public void onPressXor(View view) {
         operationSelected = getString(R.string.XOR);
-        previousDecInput = Integer.parseInt(tvDEC.getText().toString());
-        previousBinInput = tvBIN.getText().toString();
-        clearTextViews();
+        setPreviousInput(view);
     }//end onPressXor method
 
     public void onPressXnor(View view) {
         operationSelected = getString(R.string.XNOR);
-        previousDecInput = Integer.parseInt(tvDEC.getText().toString());
-        previousBinInput = tvBIN.getText().toString();
-        clearTextViews();
+        setPreviousInput(view);
     }//end onPressXnor method
 
     public void onPressNot(View view) {
         operationSelected = getString(R.string.NOT);
-        previousDecInput = Integer.parseInt(tvDEC.getText().toString());
-        previousBinInput = tvBIN.getText().toString();
-        clearTextViews();
+        setPreviousInput(view);
         onPressEqual(view);
     }//end onPressNot method
 
     public void onPressMod(View view) {
         operationSelected = getString(R.string.mod);
-        previousDecInput = Integer.parseInt(tvDEC.getText().toString());
-        previousBinInput = tvBIN.getText().toString();
-        clearTextViews();
+        setPreviousInput(view);
     }//end onPressMod method
 
     public void onPressDivide(View view) {
         operationSelected = getString(R.string.div);
-        previousDecInput = Integer.parseInt(tvDEC.getText().toString());
-        previousBinInput = tvBIN.getText().toString();
-        clearTextViews();
+        setPreviousInput(view);
     }//end onPressDivide method
 
     public void onPressMultiply(View view) {
         operationSelected = getString(R.string.mul);
-        previousDecInput = Integer.parseInt(tvDEC.getText().toString());
-        previousBinInput = tvBIN.getText().toString();
-        clearTextViews();
+        setPreviousInput(view);
     }//end onPressMultiply method
 
     public void onPressAdd(View view) {
         operationSelected = getString(R.string.add);
-        previousDecInput = Integer.parseInt(tvDEC.getText().toString());
-        previousBinInput = tvBIN.getText().toString();
-        clearTextViews();
+        setPreviousInput(view);
     }//end onPressAdd method method
 
     public void onPressSubtract(View view) {
         operationSelected = getString(R.string.sub);
+        setPreviousInput(view);
+    }//end onPressSubtract method
+
+    public void setPreviousInput(View view){
         previousDecInput = Integer.parseInt(tvDEC.getText().toString());
         previousBinInput = tvBIN.getText().toString();
         clearTextViews();
-    }//end onPressSubtract method
+    }
 
     public void onPressEqual(View view) {
         // toast code starts here
@@ -385,6 +367,8 @@ public class MainActivity extends AppCompatActivity
         previousBinInput = String.format("%" + bitPrecision + "s", previousBinInput).replace(' ', '0');
 
         if (operationSelected.equalsIgnoreCase(getString(R.string.NOT))) {
+            input1 = previousBinInput;
+            input2 = tvBIN.getText().toString();
             binResult = calculatorModel.not(previousBinInput);
             decResult = calculatorModel.convertBase2toBase10(binResult, bitPrecision, signed);
 
