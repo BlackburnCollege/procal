@@ -75,11 +75,21 @@ public class ExampleUnitTest {
     @Test
     public void or_isCorrect() throws Exception {
         assertEquals("011", calculator.or("010", "011"));
+        assertEquals("111", calculator.or("110", "111"));
+        assertEquals("111", calculator.or("110", "011"));
+        assertEquals("111", calculator.or("010", "111"));
+        assertEquals("0000", calculator.or("000", "0000"));
+        assertEquals("0111", calculator.or("0111", "000"));
     }
 
     @Test
     public void xor_isCorrect() throws Exception {
-
+        assertEquals("001", calculator.xor("010", "011"));
+        assertEquals("001", calculator.xor("110", "111"));
+        assertEquals("101", calculator.xor("110", "011"));
+        assertEquals("101", calculator.xor("010", "111"));
+        assertEquals("0000", calculator.xor("000", "0000"));
+        assertEquals("0111", calculator.xor("0111", "000"));
     }
 
     @Test
@@ -92,31 +102,97 @@ public class ExampleUnitTest {
 
     @Test
     public void and_isCorrect() throws Exception {
-
+        assertEquals("010", calculator.and("010", "011"));
+        assertEquals("110", calculator.and("110", "111"));
+        assertEquals("010", calculator.and("110", "011"));
+        assertEquals("010", calculator.and("010", "111"));
+        assertEquals("0000", calculator.and("000", "0000"));
+        assertEquals("0000", calculator.and("0111", "000"));
     }
     @Test
     public void nor_isCorrect() throws Exception {
-
+        assertEquals("100", calculator.nor("010", "011"));
+        assertEquals("000", calculator.nor("110", "111"));
+        assertEquals("000", calculator.nor("110", "011"));
+        assertEquals("000", calculator.nor("010", "111"));
+        assertEquals("1111", calculator.nor("000", "0000"));
+        assertEquals("1000", calculator.nor("0111", "000"));
     }
 
     @Test
     public void xnor_isCorrect() throws Exception {
-
+        assertEquals("110", calculator.xnor("010", "011"));
+        assertEquals("110", calculator.xnor("110", "111"));
+        assertEquals("010", calculator.xnor("110", "011"));
+        assertEquals("010", calculator.xnor("010", "111"));
+        assertEquals("1111", calculator.xnor("000", "0000"));
+        assertEquals("1000", calculator.xnor("0111", "000"));
     }
 
     @Test
     public void nand_isCorrect() throws Exception {
-
+        assertEquals("101", calculator.nand("010", "011"));
+        assertEquals("001", calculator.nand("110", "111"));
+        assertEquals("101", calculator.nand("110", "011"));
+        assertEquals("101", calculator.nand("010", "111"));
+        assertEquals("1111", calculator.nand("000", "0000"));
+        assertEquals("1111", calculator.nand("0111", "000"));
     }
 
     @Test
     public void base2to8_isCorrect() throws Exception {
-
+        //4 bit unsigned
+        assertEquals("11", calculator.convertBase2toBase8("1001", 4, false));
+        assertEquals("01", calculator.convertBase2toBase8("0001", 4, false));
+        assertEquals("00", calculator.convertBase2toBase8("0000", 4, false));
+        //8 bit unsigned
+        assertEquals("211", calculator.convertBase2toBase8("10001001", 8, false));
+        assertEquals("001", calculator.convertBase2toBase8("00000001", 8, false));
+        assertEquals("000", calculator.convertBase2toBase8("00000000", 8, false));
+        //8 bit signed
+        assertEquals("611", calculator.convertBase2toBase8("10001001", 8, true));
+        assertEquals("001", calculator.convertBase2toBase8("00000001", 8, true));
+        assertEquals("000", calculator.convertBase2toBase8("00000000", 8, true));
+        //16 But unsigned
+        assertEquals("177771", calculator.convertBase2toBase8("1111111111111001", 16, false));
+        assertEquals("000001", calculator.convertBase2toBase8("0000000000000001", 16, false));
+        assertEquals("000000", calculator.convertBase2toBase8("0000000000000000", 16, false));
+        //16 bit signed
+        assertEquals("777771", calculator.convertBase2toBase8("1111111111111001", 16, true));
+        assertEquals("000001", calculator.convertBase2toBase8("0000000000000001", 16, true));
+        assertEquals("000000", calculator.convertBase2toBase8("0000000000000000", 16, true));
+        //32 bit signed
+        assertEquals("77777777771", calculator.convertBase2toBase8("11111111111111111111111111111001", 32, true));
+        assertEquals("00000000001", calculator.convertBase2toBase8("0000000000000001", 32, true));
+        assertEquals("00000000000", calculator.convertBase2toBase8("0000000000000000", 32, true));
     }
 
     @Test
     public void base2to10_isCorrect() throws Exception {
-
+        //4 bit unsigned
+        assertEquals("9", calculator.convertBase2toBase10("1001", 4, false));
+        assertEquals("1", calculator.convertBase2toBase10("0001", 4, false));
+        assertEquals("0", calculator.convertBase2toBase10("0000", 4, false));
+        //8 bit unsigned
+        assertEquals("137", calculator.convertBase2toBase10("10001001", 8, false));
+        assertEquals("1", calculator.convertBase2toBase10("00000001", 8, false));
+        assertEquals("0", calculator.convertBase2toBase10("00000000", 8, false));
+        //8 bit signed
+        assertEquals("-9", calculator.convertBase2toBase10("11110111", 8, true));
+        assertEquals("1", calculator.convertBase2toBase10("00000001", 8, true));
+        assertEquals("0", calculator.convertBase2toBase10("00000000", 8, true));
+        //16 But unsigned
+        assertEquals("32777", calculator.convertBase2toBase10("1000000000001001", 16, false));
+        assertEquals("1", calculator.convertBase2toBase10("0000000000000001", 16, false));
+        assertEquals("0", calculator.convertBase2toBase10("0000000000000000", 16, false));
+        //16 bit signed
+        assertEquals("-7", calculator.convertBase2toBase10("1111111111111001", 16, true));
+        assertEquals("1", calculator.convertBase2toBase10("0000000000000001", 16, true));
+        assertEquals("0", calculator.convertBase2toBase10("0000000000000000", 16, true));
+        //32 bit signed
+        assertEquals("-7", calculator.convertBase2toBase10("11111111111111111111111111111001", 32, true));
+        assertEquals("1", calculator.convertBase2toBase10("0000000000000001", 32, true));
+       assertEquals("0", calculator.convertBase2toBase10("0000000000000000", 32, true));
     }
 
     @Test
@@ -131,7 +207,30 @@ public class ExampleUnitTest {
 
     @Test
     public void base8to10_isCorrect() throws Exception {
-
+        //4 bit unsigned
+        //assertEquals("9", calculator.convertBase8toBase10("1001", 4, false));
+        assertEquals("1", calculator.convertBase8toBase10("01", 4, false));
+        assertEquals("0", calculator.convertBase8toBase10("0", 4, false));
+        //8 bit unsigned
+        //assertEquals("137", calculator.convertBase8toBase10("10001001", 8, false));
+        assertEquals("1", calculator.convertBase8toBase10("01", 8, false));
+        assertEquals("0", calculator.convertBase8toBase10("0", 8, false));
+        //8 bit signed
+        //assertEquals("-9", calculator.convertBase2toBase10("11110111", 8, true));
+        assertEquals("1", calculator.convertBase8toBase10("01", 8, true));
+        assertEquals("0", calculator.convertBase8toBase10("0", 8, true));
+        //16 But unsigned
+       // assertEquals("32777", calculator.convertBase8toBase10("1000000000001001", 16, false));
+        assertEquals("1", calculator.convertBase8toBase10("01", 16, false));
+        assertEquals("0", calculator.convertBase8toBase10("0", 16, false));
+        //16 bit signed
+       // assertEquals("-7", calculator.convertBase8toBase10("1111111111111001", 16, true));
+        assertEquals("1", calculator.convertBase8toBase10("01", 16, true));
+        assertEquals("0", calculator.convertBase8toBase10("0", 16, true));
+        //32 bit signed
+       // assertEquals("-7", calculator.convertBase8toBase10("11111111111111111111111111111001", 32, true));
+        assertEquals("1", calculator.convertBase8toBase10("01", 32, true));
+        assertEquals("0", calculator.convertBase8toBase10("0", 32, true));
     }
 
     @Test
@@ -166,7 +265,30 @@ public class ExampleUnitTest {
 
     @Test
     public void base16to10_isCorrect() throws Exception {
-
+        //4 bit unsigned
+        //assertEquals("9", calculator.convertBase8toBase10("1001", 4, false));
+        assertEquals("1", calculator.convertBase16toBase10("1", 4, false));
+        assertEquals("0", calculator.convertBase16toBase10("0", 4, false));
+        //8 bit unsigned
+        //assertEquals("137", calculator.convertBase8toBase10("10001001", 8, false));
+        assertEquals("1", calculator.convertBase16toBase10("1", 8, false));
+        assertEquals("0", calculator.convertBase16toBase10("0", 8, false));
+        //8 bit signed
+        //assertEquals("-9", calculator.convertBase2toBase10("11110111", 8, true));
+        assertEquals("1", calculator.convertBase16toBase10("1", 8, true));
+        assertEquals("0", calculator.convertBase16toBase10("0", 8, true));
+        //16 But unsigned
+        // assertEquals("32777", calculator.convertBase8toBase10("1000000000001001", 16, false));
+        assertEquals("1", calculator.convertBase16toBase10("1", 16, false));
+        assertEquals("0", calculator.convertBase16toBase10("0", 16, false));
+        //16 bit signed
+        // assertEquals("-7", calculator.convertBase8toBase10("1111111111111001", 16, true));
+        assertEquals("1", calculator.convertBase16toBase10("1", 16, true));
+        assertEquals("0", calculator.convertBase16toBase10("0", 16, true));
+        //32 bit signed
+        // assertEquals("-7", calculator.convertBase8toBase10("11111111111111111111111111111001", 32, true));
+        assertEquals("1", calculator.convertBase16toBase10("1", 32, true));
+        assertEquals("0", calculator.convertBase16toBase10("0", 32, true));
     }
 
     @Test
