@@ -25,13 +25,12 @@ public class Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////// convertBase2toBase* Methods /////////////////////////////////
-
     /**
      * convertBase2toBase8 Method
      *
-     * @param binString    - assume a String of 1s and 0s with length bitPrecision or less
+     * @param binString - assume a String of 1s and 0s with length bitPrecision or less
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed       - a boolean that indicates two's compliment conversion
+     * @param signed - a boolean that indicates two's compliment conversion
      * @return a string base8 representation of binString or an error message
      */
     public String convertBase2toBase8(String binString, int bitPrecision, boolean signed) {
@@ -95,9 +94,9 @@ public class Model {
     /**
      * convertBase2toBase10 Method
      *
-     * @param binString    - assume a String of 1s and 0s with length bitPrecision or less
+     * @param binString - assume a String of 1s and 0s with length bitPrecision or less
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed       - a boolean that indicates two's compliment conversion
+     * @param signed - a boolean that indicates two's compliment conversion
      * @return a string base10 representation of binString or an error message
      */
     public String convertBase2toBase10(String binString, int bitPrecision, boolean signed) {
@@ -135,9 +134,9 @@ public class Model {
     /**
      * convertBase2toBase16 Method
      *
-     * @param binString    - assume a String of 1s and 0s with length bitPrecision or less
+     * @param binString - assume a String of 1s and 0s with length bitPrecision or less
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed       - a boolean that indicates two's compliment conversion
+     * @param signed - a boolean that indicates two's compliment conversion
      * @return a string base16 representation of binString or an error message
      */
     public String convertBase2toBase16(String binString, int bitPrecision, boolean signed) {
@@ -224,13 +223,12 @@ public class Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////// convertBase8toBase* Methods /////////////////////////////////
-
     /**
      * convertBase8toBase2 Method
      *
-     * @param octString    - assume a String of octal values with bit length of bitPrecision or less
+     * @param octString - assume a String of octal values with bit length of bitPrecision or less
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed       - a boolean that indicates two's compliment conversion
+     * @param signed - a boolean that indicates two's compliment conversion
      * @return a string base2 representation of octString or an error message
      */
     public String convertBase8toBase2(String octString, int bitPrecision, boolean signed) {
@@ -301,9 +299,9 @@ public class Model {
     /**
      * convertBase8toBase10 Method
      *
-     * @param octString    - assume a String of octal values with bit length of bitPrecision or less
+     * @param octString - assume a String of octal values with bit length of bitPrecision or less
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed       - a boolean that indicates two's compliment conversion
+     * @param signed - a boolean that indicates two's compliment conversion
      * @return a string base10 representation of octString or an error message
      */
     public String convertBase8toBase10(String octString, int bitPrecision, boolean signed) {
@@ -323,9 +321,9 @@ public class Model {
     /**
      * convertBase8toBase10 Method
      *
-     * @param octString    - assume a String of octal values with bit length of bitPrecision or less
+     * @param octString - assume a String of octal values with bit length of bitPrecision or less
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed       - a boolean that indicates two's compliment conversion
+     * @param signed - a boolean that indicates two's compliment conversion
      * @return a string base16 representation of octString or an error message
      */
     public String convertBase8toBase16(String octString, int bitPrecision, boolean signed) {
@@ -344,13 +342,12 @@ public class Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////// convertBase10toBase* Methods /////////////////////////////////
-
     /**
      * convertBase8toBase2 Method
      *
-     * @param decInteger   - assume a standard 32-bit integer decimal number
+     * @param decInteger - assume a standard 32-bit integer decimal number
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed       - a boolean that indicates two's compliment conversion
+     * @param signed - a boolean that indicates two's compliment conversion
      * @return a string base2 representation of decInteger or an error message
      */
     public String convertBase10toBase2(int decInteger, int bitPrecision, boolean signed) {
@@ -384,21 +381,29 @@ public class Model {
     /**
      * convertBase10toBase2 Method
      *
-     * @param decString    - assume a standard 32-bit integer decimal number in String form
+     * @param decString - assume a standard 32-bit integer decimal number in String form
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed       - a boolean that indicates two's compliment conversion
+     * @param signed - a boolean that indicates two's compliment conversion
      * @return a string base2 representation of decInteger or an error message
      */
     public String convertBase10toBase2(String decString, int bitPrecision, boolean signed) {
-        return convertBase10toBase2(Integer.parseInt(decString), bitPrecision, signed);
+        String buffer;
+
+        try {
+            buffer = convertBase10toBase2(Integer.parseInt(decString), bitPrecision, signed);
+        } catch (Exception e) {
+            buffer = ERRMSG;
+        }
+
+        return buffer;
     }//end convertBase10toBase2 method
 
     /**
      * convertBase10toBase8 Method
      *
-     * @param decInteger   - assume a standard 32-bit integer decimal number
+     * @param decInteger - assume a standard 32-bit integer decimal number
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed       - a boolean that indicates two's compliment conversion
+     * @param signed - a boolean that indicates two's compliment conversion
      * @return a string base8 representation of decInteger or an error message
      */
     public String convertBase10toBase8(int decInteger, int bitPrecision, boolean signed) {
@@ -418,21 +423,29 @@ public class Model {
     /**
      * convertBase10toBase8 Method
      *
-     * @param decString    - assume a standard 32-bit integer decimal number in String form
+     * @param decString - assume a standard 32-bit integer decimal number in String form
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed       - a boolean that indicates two's compliment conversion
+     * @param signed - a boolean that indicates two's compliment conversion
      * @return a string base8 representation of decInteger or an error message
      */
     public String convertBase10toBase8(String decString, int bitPrecision, boolean signed) {
-        return convertBase10toBase8(Integer.parseInt(decString), bitPrecision, signed);
+        String buffer;
+
+        try {
+            buffer = convertBase10toBase8(Integer.parseInt(decString), bitPrecision, signed);
+        } catch (Exception e) {
+            buffer = ERRMSG;
+        }
+
+        return buffer;
     }//end convertBase10toBase8 method
 
     /**
      * convertBase10toBase16 Method
      *
-     * @param decInteger   - assume a standard 32-bit integer decimal number
+     * @param decInteger - assume a standard 32-bit integer decimal number
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed       - a boolean that indicates two's compliment conversion
+     * @param signed - a boolean that indicates two's compliment conversion
      * @return a string base16 representation of decInteger or an error message
      */
     public String convertBase10toBase16(int decInteger, int bitPrecision, boolean signed) {
@@ -452,24 +465,31 @@ public class Model {
     /**
      * convertBase10toBase16 Method
      *
-     * @param decString    - assume a standard 32-bit integer decimal number in String form
+     * @param decString - assume a standard 32-bit integer decimal number in String form
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed       - a boolean that indicates two's compliment conversion
+     * @param signed - a boolean that indicates two's compliment conversion
      * @return a string base16 representation of decInteger or an error message
      */
     public String convertBase10toBase16(String decString, int bitPrecision, boolean signed) {
-        return convertBase10toBase16(Integer.parseInt(decString), bitPrecision, signed);
+        String buffer;
+
+        try {
+            buffer = convertBase10toBase16(Integer.parseInt(decString), bitPrecision, signed);
+        } catch (Exception e) {
+            buffer = ERRMSG;
+        }
+
+        return buffer;
     }//end convertBase10toBase16 method
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////// convertBase16toBase* Methods /////////////////////////////////
-
     /**
      * convertBase16toBase2 Method
      *
-     * @param hexString    - assume a String of hexadecimal values with bit length of bitPrecision or less
+     * @param hexString - assume a String of hexadecimal values with bit length of bitPrecision or less
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed       - a boolean that indicates two's compliment conversion
+     * @param signed - a boolean that indicates two's compliment conversion
      * @return a string base2 representation of hexString or an error message
      */
     public String convertBase16toBase2(String hexString, int bitPrecision, boolean signed) {
@@ -575,9 +595,9 @@ public class Model {
     /**
      * convertBase16toBase8 Method
      *
-     * @param hexString    - assume a String of hexadecimal values with bit length of bitPrecision or less
+     * @param hexString - assume a String of hexadecimal values with bit length of bitPrecision or less
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed       - a boolean that indicates two's compliment conversion
+     * @param signed - a boolean that indicates two's compliment conversion
      * @return a string base8 representation of hexString or an error message
      */
     public String convertBase16toBase8(String hexString, int bitPrecision, boolean signed) {
@@ -597,9 +617,9 @@ public class Model {
     /**
      * convertBase16toBase8 Method
      *
-     * @param hexString    - assume a String of hexadecimal values with bit length of bitPrecision or less
+     * @param hexString - assume a String of hexadecimal values with bit length of bitPrecision or less
      * @param bitPrecision - any bit precision in range 5 - 32 will work for both signed/unsigned
-     * @param signed       - a boolean that indicates two's compliment conversion
+     * @param signed - a boolean that indicates two's compliment conversion
      * @return a string base8 representation of hexString or an error message
      */
     public String convertBase16toBase10(String hexString, int bitPrecision, boolean signed) {
@@ -618,7 +638,6 @@ public class Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////// Helper Methods ////////////////////////////////////////
-
     private String bigIntegerToBigIntegerString(BigInteger bigInt) {
         return bigInt.toString();
     }//end bigIntegerToBigIntegerString method
@@ -665,9 +684,9 @@ public class Model {
     /**
      * isWithinBounds Method
      *
-     * @param decNum       - a normal base 10 integer number
+     * @param decNum - a normal base 10 integer number
      * @param bitPrecision - the number of binary bits we have to represent decNum
-     * @param signed       - true if we want the binary representation to be signed
+     * @param signed - true if we want the binary representation to be signed
      * @return true if decNum is within upper and lower bounds
      */
     public boolean isWithinBounds(long decNum, int bitPrecision, boolean signed) {
@@ -692,7 +711,6 @@ public class Model {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////// Operation Methods ///////////////////////////////////////
-
     /**
      * binaryAddition Method - https://stackoverflow.com/questions/8548586/adding-binary-numbers
      *
@@ -751,10 +769,17 @@ public class Model {
      * @return sum
      */
     public String add(String dec1, String dec2) {
-        int num1 = Integer.parseInt(dec1);
-        int num2 = Integer.parseInt(dec2);
+        String buffer;
 
-        return "" + (num1 + num2);
+        try {
+            int num1 = Integer.parseInt(dec1);
+            int num2 = Integer.parseInt(dec2);
+            buffer = "" + (num1 + num2);
+        } catch (Exception e) {
+            buffer = ERRMSG;
+        }
+
+        return buffer;
     }
 
     /**
@@ -765,10 +790,17 @@ public class Model {
      * @return difference
      */
     public String sub(String dec1, String dec2) {
-        int num1 = Integer.parseInt(dec1);
-        int num2 = Integer.parseInt(dec2);
+        String buffer;
 
-        return "" + (num1 - num2);
+        try {
+            int num1 = Integer.parseInt(dec1);
+            int num2 = Integer.parseInt(dec2);
+            buffer = "" + (num1 - num2);
+        } catch (Exception e) {
+            buffer = ERRMSG;
+        }
+
+        return buffer;
     }
 
     /**
@@ -779,10 +811,17 @@ public class Model {
      * @return product
      */
     public String mul(String dec1, String dec2) {
-        int num1 = Integer.parseInt(dec1);
-        int num2 = Integer.parseInt(dec2);
+        String buffer;
 
-        return "" + (num1 * num2);
+        try {
+            int num1 = Integer.parseInt(dec1);
+            int num2 = Integer.parseInt(dec2);
+            buffer = "" + (num1 * num2);
+        } catch (Exception e) {
+            buffer = ERRMSG;
+        }
+
+        return buffer;
     }
 
     /**
@@ -793,10 +832,17 @@ public class Model {
      * @return quotient
      */
     public String div(String dec1, String dec2) {
-        int num1 = Integer.parseInt(dec1);
-        int num2 = Integer.parseInt(dec2);
+        String buffer;
 
-        return "" + (num1 / num2);
+        try {
+            int num1 = Integer.parseInt(dec1);
+            int num2 = Integer.parseInt(dec2);
+            buffer = "" + (num1 / num2);
+        } catch (Exception e) {
+            buffer = ERRMSG;
+        }
+
+        return buffer;
     }
 
     /**
@@ -807,15 +853,21 @@ public class Model {
      * @return quotient
      */
     public String mod(String dec1, String dec2) {
-        int num1 = Integer.parseInt(dec1);
-        int num2 = Integer.parseInt(dec2);
+        String buffer;
 
-        return "" + (num1 % num2);
+        try {
+            int num1 = Integer.parseInt(dec1);
+            int num2 = Integer.parseInt(dec2);
+            buffer = "" + (num1 % num2);
+        } catch (Exception e) {
+            buffer = ERRMSG;
+        }
+
+        return buffer;
     }
 
     /**
-     * Takes in two binary numbers as Strings and returns the bitwise AND of input1 and input2 as a
-     * String
+     * Takes in two binary numbers as Strings and returns the bitwise AND of input1 and input2 as a String
      *
      * @param input1 - first binary number
      * @param input2 - second binary number
@@ -842,8 +894,7 @@ public class Model {
     }
 
     /**
-     * Takes in two binary numbers as Strings and returns the bitwise OR of input1 and input2 as a
-     * String
+     * Takes in two binary numbers as Strings and returns the bitwise OR of input1 and input2 as a String
      *
      * @param input1 - first binary number
      * @param input2 - second binary number
@@ -870,8 +921,7 @@ public class Model {
     }
 
     /**
-     * Takes in two binary numbers as Strings and returns the bitwise XOR of input1 and input2 as a
-     * String
+     * Takes in two binary numbers as Strings and returns the bitwise XOR of input1 and input2 as a String
      *
      * @param input1 - first binary number
      * @param input2 - second binary number
@@ -898,8 +948,7 @@ public class Model {
     }
 
     /**
-     * Takes in two binary numbers as Strings and returns the bitwise NAND of input1 and input2 as a
-     * String
+     * Takes in two binary numbers as Strings and returns the bitwise NAND of input1 and input2 as a String
      *
      * @param input1 - first binary number
      * @param input2 - second binary number
@@ -910,8 +959,7 @@ public class Model {
     }
 
     /**
-     * Takes in two binary numbers as Strings and returns the bitwise NOR of input1 and input2 as a
-     * String
+     * Takes in two binary numbers as Strings and returns the bitwise NOR of input1 and input2 as a String
      *
      * @param input1 - first binary number
      * @param input2 - second binary number
@@ -922,8 +970,7 @@ public class Model {
     }
 
     /**
-     * Takes in two binary numbers as Strings and returns the bitwise XNOR of input1 and input2 as a
-     * String
+     * Takes in two binary numbers as Strings and returns the bitwise XNOR of input1 and input2 as a String
      *
      * @param input1 - first binary number
      * @param input2 - second binary number
