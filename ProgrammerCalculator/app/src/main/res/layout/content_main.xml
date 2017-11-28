@@ -193,6 +193,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+			    android:id="@+id/linearLayoutButtonRow1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -236,6 +237,7 @@
             </LinearLayout>
 
             <LinearLayout
+			    android:id="@+id/linearLayoutButtonRow2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -279,6 +281,8 @@
             </LinearLayout>
 
             <LinearLayout
+			
+			    android:id="@+id/linearLayoutButtonRow3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -322,6 +326,7 @@
             </LinearLayout>
 
             <LinearLayout
+			    android:id="@+id/linearLayoutButtonRow4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -365,6 +370,7 @@
             </LinearLayout>
 
             <LinearLayout
+			    android:id="@+id/linearLayoutButtonRow5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -408,6 +414,7 @@
             </LinearLayout>
 
             <LinearLayout
+			    android:id="@+id/linearLayoutButtonRow6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -451,6 +458,7 @@
             </LinearLayout>
 
             <LinearLayout
+			    android:id="@+id/linearLayoutButtonRow7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -494,6 +502,7 @@
             </LinearLayout>
 
             <LinearLayout
+			    android:id="@+id/linearLayoutButtonRow8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
