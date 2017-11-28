@@ -152,16 +152,53 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void resizeGUI() {
-        // manually resize the outter LinearLayout
+        // get the device's height and width in pixels
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int heightPxs = metrics.heightPixels;
         int widthPxs = metrics.widthPixels;
 
+        // manually resize the outter LinearLayout
         LinearLayout linearLayoutContainer = (LinearLayout) findViewById(R.id.linearLayoutContainer);
         LayoutParams linearLayoutParams = linearLayoutContainer.getLayoutParams();
         linearLayoutParams.width = widthPxs;
         linearLayoutParams.height = heightPxs;
+
+        // manually resize each LinearLayout button row so that each button's height = width (square buttons look better)
+        int buttonWidth = widthPxs / 4; //4 buttons per row => each button has widthPxs/4 of width (except for the equal button)
+
+        LinearLayout linearLayoutButtonRow1 = (LinearLayout) findViewById(R.id.linearLayoutButtonRow1);
+        LayoutParams linearLayoutBR1Params = linearLayoutButtonRow1.getLayoutParams();
+        linearLayoutBR1Params.height = buttonWidth;
+
+        LinearLayout linearLayoutButtonRow2 = (LinearLayout) findViewById(R.id.linearLayoutButtonRow2);
+        LayoutParams linearLayoutBR2Params = linearLayoutButtonRow2.getLayoutParams();
+        linearLayoutBR2Params.height = buttonWidth;
+
+        LinearLayout linearLayoutButtonRow3 = (LinearLayout) findViewById(R.id.linearLayoutButtonRow3);
+        LayoutParams linearLayoutBR3Params = linearLayoutButtonRow3.getLayoutParams();
+        linearLayoutBR3Params.height = buttonWidth;
+
+        LinearLayout linearLayoutButtonRow4 = (LinearLayout) findViewById(R.id.linearLayoutButtonRow4);
+        LayoutParams linearLayoutBR4Params = linearLayoutButtonRow4.getLayoutParams();
+        linearLayoutBR4Params.height = buttonWidth;
+
+        LinearLayout linearLayoutButtonRow5 = (LinearLayout) findViewById(R.id.linearLayoutButtonRow5);
+        LayoutParams linearLayoutBR5Params = linearLayoutButtonRow5.getLayoutParams();
+        linearLayoutBR5Params.height = buttonWidth;
+
+        LinearLayout linearLayoutButtonRow6 = (LinearLayout) findViewById(R.id.linearLayoutButtonRow6);
+        LayoutParams linearLayoutBR6Params = linearLayoutButtonRow6.getLayoutParams();
+        linearLayoutBR6Params.height = buttonWidth;
+
+        LinearLayout linearLayoutButtonRow7 = (LinearLayout) findViewById(R.id.linearLayoutButtonRow7);
+        LayoutParams linearLayoutBR7Params = linearLayoutButtonRow7.getLayoutParams();
+        linearLayoutBR7Params.height = buttonWidth;
+
+        LinearLayout linearLayoutButtonRow8 = (LinearLayout) findViewById(R.id.linearLayoutButtonRow8);
+        LayoutParams linearLayoutBR8Params = linearLayoutButtonRow8.getLayoutParams();
+        linearLayoutBR8Params.height = buttonWidth;
+
     }
 
     private void updateAppTitle(String s) {
@@ -343,22 +380,29 @@ public class MainActivity extends AppCompatActivity
         setPreviousInput(view);
     }//end onPressSubtract method
 
-    public void setPreviousInput(View view){
-        previousDecInput = Integer.parseInt(tvDEC.getText().toString());
-        previousBinInput = tvBIN.getText().toString();
+    public void setPreviousInput(View view) {
+        try {
+            previousDecInput = Integer.parseInt(tvDEC.getText().toString());
+            previousBinInput = tvBIN.getText().toString();
+        } catch (Exception e) {
+            showPreviousInputErrToast();
+            operationSelected = getString(R.string.NOT);
+            previousDecInput = 0;
+            previousBinInput = "";
+        }
         clearTextViews();
     }
 
-    public void onPressEqual(View view) {
-        // toast code starts here
+    public void showPreviousInputErrToast() {
         Context context = getApplicationContext();
-        CharSequence text = "Tim doesn't know how to use Android Studio!";
+        CharSequence text = "Invalid input. Calculator will now be reset.";
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-        // toast code ends here
+    }
 
+    public void onPressEqual(View view) {
         String input1;
         String input2;
         String binResult = "";
@@ -466,6 +510,7 @@ public class MainActivity extends AppCompatActivity
     public void onPressAc(View view) {
         operationSelected = getString(R.string.NOT);
         previousDecInput = 0;
+        previousBinInput = "";
         clearTextViews();
     }//end onPressAC method
 
