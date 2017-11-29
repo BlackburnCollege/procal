@@ -16,8 +16,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.RelativeLayout;
-import android.view.Display;
 
 /**
  * MainActivity Class - Controller
@@ -40,10 +38,16 @@ public class MainActivity extends AppCompatActivity
     private int previousDecInput;
     private String previousBinInput;
 
+    private TextView tvDEClabel; // the textview that displays DEC
+    private TextView tvHEXlabel; // the textview that displays HEX
+    private TextView tvOCTlabel; // the textview that displays OCT
+    private TextView tvBINlabel; // the textview that displays BIN
+
     private TextView tvDEC; // the textview that displays decimal values
     private TextView tvHEX; // the textview that displays hexadecimal values
     private TextView tvOCT; // the textview that displays octal values
     private TextView tvBIN; // the textview that displays binary values
+
 
     /**
      * onCreate Method - initializes our activity
@@ -72,16 +76,21 @@ public class MainActivity extends AppCompatActivity
         resizeGUI();
 
         // initialize our TextView GUI objects
-        tvDEC = (TextView) findViewById((R.id.textViewDEC));
-        tvHEX = (TextView) findViewById((R.id.textViewHEX));
-        tvOCT = (TextView) findViewById((R.id.textViewOCT));
-        tvBIN = (TextView) findViewById((R.id.textViewBIN));
+        tvDEClabel = (TextView) findViewById(R.id.DECText);
+        tvHEXlabel = (TextView) findViewById(R.id.HEXText);
+        tvOCTlabel = (TextView) findViewById(R.id.OCTText);
+        tvBINlabel = (TextView) findViewById(R.id.BINText);
+        tvDEC = (TextView) findViewById(R.id.textViewDEC);
+        tvHEX = (TextView) findViewById(R.id.textViewHEX);
+        tvOCT = (TextView) findViewById(R.id.textViewOCT);
+        tvBIN = (TextView) findViewById(R.id.textViewBIN);
 
         // initialize our calculator Model object
         calculatorModel = new Model();
 
         // set default values for our global Controller variables
         inputMode = getString(R.string.DEC);
+        tvDEClabel.setBackgroundResource(R.color.colorPrimaryLight);
         signed = true;
         bitPrecision = 32;
         operationSelected = null;
@@ -154,32 +163,32 @@ public class MainActivity extends AppCompatActivity
             // update global Controller variables
             signed = false;
             bitPrecision = 4;
-            setTitle(getString(R.string.unsigned4bit));
+            updateAppTitle(getString(R.string.unsigned4bit));
         } else if (id == R.id.mode_8bitsigned) {
             // update global Controller variables
             signed = true;
             bitPrecision = 8;
-            setTitle(getString(R.string.signed8bit));
+            updateAppTitle(getString(R.string.signed8bit));
         } else if (id == R.id.mode_8bitunsigned) {
             // update global Controller variables
             signed = false;
             bitPrecision = 8;
-            setTitle(getString(R.string.unsigned8bit));
+            updateAppTitle(getString(R.string.unsigned8bit));
         } else if (id == R.id.mode_16bitsigned) {
             // update global Controller variables
             signed = true;
             bitPrecision = 16;
-            setTitle(getString(R.string.signed16bit));
+            updateAppTitle(getString(R.string.signed16bit));
         } else if (id == R.id.mode_16bitunsigned) {
             // update global Controller variables
             signed = false;
             bitPrecision = 16;
-            setTitle(getString(R.string.unsigned16bit));
+            updateAppTitle(getString(R.string.unsigned16bit));
         } else if (id == R.id.mode_32bitsigned) {
             // update global Controller variables
             signed = true;
             bitPrecision = 32;
-            setTitle(getString(R.string.signed32bit));
+            updateAppTitle(getString(R.string.signed32bit));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -248,6 +257,7 @@ public class MainActivity extends AppCompatActivity
      */
     private void updateAppTitle(String s) {
         setTitle(s);
+
     }//end updateAppTitle method
 
     /**
@@ -416,22 +426,22 @@ public class MainActivity extends AppCompatActivity
         String legalHexInputs = "0123456789ABCDEF";
         String buffer;
 
-        if (inputMode.equalsIgnoreCase(getString(R.string.BIN)) && legalBinInputs.contains(buttonValue)) {
+        if (inputMode.equalsIgnoreCase(getString(R.string.BIN)) && legalBinInputs.contains(buttonValue) && tvBIN.length() + 1 < 33) {
             buffer = tvBIN.getText().toString() + buttonValue;
             tvBIN.setText(buffer);
             updateTextViews(); // update TextViews only on legal button presses
 
-        } else if (inputMode.equalsIgnoreCase(getString(R.string.OCT)) && legalOctInputs.contains(buttonValue)) {
+        } else if (inputMode.equalsIgnoreCase(getString(R.string.OCT)) && legalOctInputs.contains(buttonValue) && tvOCT.length() + 1 < 12) {
             buffer = tvOCT.getText().toString() + buttonValue;
             tvOCT.setText(buffer);
             updateTextViews(); // update TextViews only on legal button presses
 
-        } else if (inputMode.equalsIgnoreCase(getString(R.string.DEC)) && legalDecInputs.contains(buttonValue)) {
+        } else if (inputMode.equalsIgnoreCase(getString(R.string.DEC)) && legalDecInputs.contains(buttonValue) && tvDEC.length() + 1 < 11) {
             buffer = tvDEC.getText().toString() + buttonValue;
             tvDEC.setText(buffer);
             updateTextViews(); // update TextViews only on legal button presses
 
-        } else if (inputMode.equalsIgnoreCase(getString(R.string.HEX)) && legalHexInputs.contains(buttonValue)) {
+        } else if (inputMode.equalsIgnoreCase(getString(R.string.HEX)) && legalHexInputs.contains(buttonValue) && tvHEX.length() + 1 < 9) {
             buffer = tvHEX.getText().toString() + buttonValue;
             tvHEX.setText(buffer);
             updateTextViews(); // update TextViews only on legal button presses
@@ -446,6 +456,10 @@ public class MainActivity extends AppCompatActivity
      */
     public void onPressDec(View view) {
         inputMode = getString(R.string.DEC);
+        tvDEClabel.setBackgroundResource(R.color.colorPrimaryLight);
+        tvHEXlabel.setBackgroundResource(R.color.transparent);
+        tvOCTlabel.setBackgroundResource(R.color.transparent);
+        tvBINlabel.setBackgroundResource(R.color.transparent);
     }//end onPressDec method
 
     /**
@@ -455,6 +469,10 @@ public class MainActivity extends AppCompatActivity
      */
     public void onPressHex(View view) {
         inputMode = getString(R.string.HEX);
+        tvDEClabel.setBackgroundResource(R.color.transparent);
+        tvHEXlabel.setBackgroundResource(R.color.colorPrimaryLight);
+        tvOCTlabel.setBackgroundResource(R.color.transparent);
+        tvBINlabel.setBackgroundResource(R.color.transparent);
     }//end onPressHex method
 
     /**
@@ -464,6 +482,10 @@ public class MainActivity extends AppCompatActivity
      */
     public void onPressOct(View view) {
         inputMode = getString(R.string.OCT);
+        tvDEClabel.setBackgroundResource(R.color.transparent);
+        tvHEXlabel.setBackgroundResource(R.color.transparent);
+        tvOCTlabel.setBackgroundResource(R.color.colorPrimaryLight);
+        tvBINlabel.setBackgroundResource(R.color.transparent);
     }//end onPressOct method
 
     /**
@@ -473,6 +495,10 @@ public class MainActivity extends AppCompatActivity
      */
     public void onPressBin(View view) {
         inputMode = getString(R.string.BIN);
+        tvDEClabel.setBackgroundResource(R.color.transparent);
+        tvHEXlabel.setBackgroundResource(R.color.transparent);
+        tvOCTlabel.setBackgroundResource(R.color.transparent);
+        tvBINlabel.setBackgroundResource(R.color.colorPrimaryLight);
     }//end onPressBin method
 
     /**

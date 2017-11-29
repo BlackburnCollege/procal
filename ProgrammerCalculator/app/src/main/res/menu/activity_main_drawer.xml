@@ -4,22 +4,22 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/mode_32bitsigned"
-            android:title="32-bit Signed" />
+            android:title="@string/signed32bit" />
         <item
             android:id="@+id/mode_16bitunsigned"
-            android:title="16-bit Unsigned" />
+            android:title="@string/unsigned16bit" />
         <item
             android:id="@+id/mode_16bitsigned"
-            android:title="16-bit Signed" />
+            android:title="@string/signed16bit" />
         <item
             android:id="@+id/mode_8bitunsigned"
-            android:title="8-bit Unsigned" />
+            android:title="@string/unsigned8bit" />
         <item
             android:id="@+id/mode_8bitsigned"
-            android:title="8-bit Signed" />
+            android:title="@string/signed8bit" />
         <item
             android:id="@+id/mode_4bitunsigned"
-            android:title="4-bit Unsigned" />
+            android:title="@string/unsigned4bit" />
 
     </group>
 </menu>

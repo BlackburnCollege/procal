@@ -42,8 +42,8 @@
     <string name="signed32bit">32-bit Signed</string>
     <string name="signed16bit">16-bit Signed</string>
     <string name="unsigned16bit">16-bit Unsigned</string>
-    <string name="signed8bit">8-bit Signed</string>
-    <string name="unsigned8bit">8-bit Unsigned</string>
-    <string name="unsigned4bit">4-bit Unsigned</string>
+    <string name="signed8bit">&#160;8-bit Signed</string>
+    <string name="unsigned8bit">&#160;8-bit Unsigned</string>
+    <string name="unsigned4bit">&#160;4-bit Unsigned</string>
 </resources>
 

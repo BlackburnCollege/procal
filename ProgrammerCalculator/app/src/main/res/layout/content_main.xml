@@ -52,7 +52,8 @@
                     android:foregroundTint="@android:color/background_dark"
                     android:onClick="onPressDec"
                     android:textAlignment="viewEnd"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:typeface="monospace" />
 
                 <TextView
                     android:id="@+id/DECText"
@@ -67,9 +68,12 @@
                     android:layout_toEndOf="@+id/textViewDEC"
                     android:background="@drawable/selector"
                     android:onClick="onPressDec"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp"
                     android:text="@string/DEC"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:typeface="monospace" />
 
             </RelativeLayout>
 
@@ -92,7 +96,8 @@
                     android:foregroundTint="@android:color/background_dark"
                     android:onClick="onPressHex"
                     android:textAlignment="viewEnd"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:typeface="monospace" />
 
                 <TextView
                     android:id="@+id/HEXText"
@@ -107,9 +112,12 @@
                     android:layout_toEndOf="@+id/textViewHEX"
                     android:background="@drawable/selector"
                     android:onClick="onPressHex"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp"
                     android:text="@string/HEX"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:typeface="monospace" />
 
             </RelativeLayout>
 
@@ -132,7 +140,8 @@
                     android:foregroundTint="@android:color/background_dark"
                     android:onClick="onPressOct"
                     android:textAlignment="viewEnd"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:typeface="monospace" />
 
                 <TextView
                     android:id="@+id/OCTText"
@@ -146,10 +155,13 @@
                     android:layout_marginTop="2dp"
                     android:layout_toEndOf="@+id/textViewOCT"
                     android:background="@drawable/selector"
-                    android:onClick="onPressHex"
+                    android:onClick="onPressOct"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp"
                     android:text="@string/OCT"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:typeface="monospace" />
 
             </RelativeLayout>
 
@@ -172,7 +184,8 @@
                     android:foregroundTint="@android:color/background_dark"
                     android:onClick="onPressBin"
                     android:textAlignment="viewEnd"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:typeface="monospace" />
 
                 <TextView
                     android:id="@+id/BINText"
@@ -187,9 +200,12 @@
                     android:layout_toEndOf="@+id/textViewBIN"
                     android:background="@drawable/selector"
                     android:onClick="onPressBin"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp"
                     android:text="@string/BIN"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:typeface="monospace" />
 
             </RelativeLayout>
         </LinearLayout>
