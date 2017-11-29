@@ -8,7 +8,14 @@
     tools:context="edu.blackburn.programmercalculator.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <!-- content_main.xml - GUI
+         @author Drew Hans
+         @author Tim Francis
+         @author Arthur LeVan
+         @author Samuel Lomanto
+      -->
 
+    <!-- This LinearLayout contains all GUI elements -->
     <LinearLayout
         android:id="@+id/linearLayoutContainer"
         android:layout_width="380dp"
@@ -17,6 +24,7 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
+        <!-- This LinearLayout contains all TextView elements -->
         <LinearLayout
             android:id="@+id/linearLayoutTextViews"
             android:layout_width="match_parent"
@@ -186,6 +194,7 @@
             </RelativeLayout>
         </LinearLayout>
 
+        <!-- This LinearLayout contains all Button elements -->
         <LinearLayout
             android:id="@+id/linearLayoutButtons"
             android:layout_width="match_parent"
@@ -193,7 +202,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-			    android:id="@+id/linearLayoutButtonRow1"
+                android:id="@+id/linearLayoutButtonRow1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -237,7 +246,7 @@
             </LinearLayout>
 
             <LinearLayout
-			    android:id="@+id/linearLayoutButtonRow2"
+                android:id="@+id/linearLayoutButtonRow2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -281,8 +290,8 @@
             </LinearLayout>
 
             <LinearLayout
-			
-			    android:id="@+id/linearLayoutButtonRow3"
+
+                android:id="@+id/linearLayoutButtonRow3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -326,7 +335,7 @@
             </LinearLayout>
 
             <LinearLayout
-			    android:id="@+id/linearLayoutButtonRow4"
+                android:id="@+id/linearLayoutButtonRow4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -370,7 +379,7 @@
             </LinearLayout>
 
             <LinearLayout
-			    android:id="@+id/linearLayoutButtonRow5"
+                android:id="@+id/linearLayoutButtonRow5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -414,7 +423,7 @@
             </LinearLayout>
 
             <LinearLayout
-			    android:id="@+id/linearLayoutButtonRow6"
+                android:id="@+id/linearLayoutButtonRow6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -458,7 +467,7 @@
             </LinearLayout>
 
             <LinearLayout
-			    android:id="@+id/linearLayoutButtonRow7"
+                android:id="@+id/linearLayoutButtonRow7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -502,7 +511,7 @@
             </LinearLayout>
 
             <LinearLayout
-			    android:id="@+id/linearLayoutButtonRow8"
+                android:id="@+id/linearLayoutButtonRow8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
