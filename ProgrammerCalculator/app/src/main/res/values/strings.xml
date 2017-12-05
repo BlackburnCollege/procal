@@ -45,5 +45,9 @@
     <string name="signed8bit">&#160;8-bit Signed</string>
     <string name="unsigned8bit">&#160;8-bit Unsigned</string>
     <string name="unsigned4bit">&#160;4-bit Unsigned</string>
+
+    <string name="procal">Procal Development Team</string>
+    <string name="devteam">Jessica Cramer, Hannah Goett, Ashley Holcomb, Riley Judd, Arthur LeVan, Samuel Lomanto, Braydon Rekart, Dakota Tebbe, Drew Hans</string>
+
 </resources>
 
